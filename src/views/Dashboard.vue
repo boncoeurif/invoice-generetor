@@ -175,16 +175,41 @@ const summaryData = computed(() => [
 const recentInvoices = computed(() => {
   return allInvoicesSorted.value.slice(0, 5);
 });
+// --- Dynamic Chart Data from real performance ---
+const chartData = computed(() => {
+  const days = [];
+  const now = new Date();
 
-const chartData = ref([
-  { label: 'Mon', height: '70%', color: '#22C55E' },
-  { label: 'Tue', height: '50%', color: '#22C55E' },
-  { label: 'Wed', height: '85%', color: '#2563EB' },
-  { label: 'Thu', height: '60%', color: '#22C55E' },
-  { label: 'Fri', height: '75%', color: '#22C55E' },
-  { label: 'Sat', height: '40%', color: '#2563EB' },
-  { label: 'Sun', height: '65%', color: '#22C55E' },
-]);
+  // Get last 7 days labels
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(now.getDate() - i);
+    days.push({
+      dateStr: d.toDateString(),
+      label: d.toLocaleDateString('en-GB', { weekday: 'short' }),
+      revenue: 0
+    });
+  }
+
+  // Aggregate revenue from real invoices
+  invoiceStore.invoices.forEach(inv => {
+    const invDate = new Date(inv.createdAt || 0).toDateString();
+    const dayMatch = days.find(d => d.dateStr === invDate);
+    if (dayMatch) {
+      dayMatch.revenue += Number(inv.total || 0);
+    }
+  });
+
+  // Find max revenue to scale heights
+  const maxRevenue = Math.max(...days.map(d => d.revenue), 1); // Avoid division by zero
+
+  return days.map(d => ({
+    label: d.label,
+    height: `${Math.max((d.revenue / maxRevenue) * 100, 5)}%`, // Min 5% height for visibility
+    color: d.dateStr === now.toDateString() ? '#22C55E' : '#2563EB', // Highlight today in green
+    revenue: d.revenue
+  }));
+});
 
 const goToCreateInvoice = () => {
   router.push('/create');
