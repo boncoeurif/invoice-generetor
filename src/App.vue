@@ -1,8 +1,8 @@
 <template>
   <div id="app" :class="['app-layout', isMobile ? 'mobile-mode' : 'desktop-mode']">
     
-    <!-- 1. Show Navigation only if Logged In -->
-    <template v-if="authStore.user">
+    <!-- 1. Authenticated App Structure -->
+    <template v-if="authStore.user && showNavigation">
       <Sidebar v-if="!isMobile" />
 
       <div class="content-area">
@@ -18,9 +18,9 @@
           </div>
         </main>
 
-        <!-- Bottom Nav Optimized for Mobile -->
+        <!-- Bottom Nav (Mobile Only) -->
         <nav v-if="isMobile" class="bottom-nav">
-          <router-link to="/" class="nav-item">
+          <router-link to="/dashboard" class="nav-item">
             <div class="nav-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
             </div>
@@ -57,7 +57,7 @@
       </div>
     </template>
 
-    <!-- 2. Show Login Screen if Not Logged In -->
+    <!-- 2. Public / Full-screen Views (Home & Login) -->
     <template v-else>
       <div v-if="!authStore.isInitialized" class="auth-loading">
         <div class="spinner"></div>
@@ -69,14 +69,22 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import Sidebar from '@/components/Sidebar.vue'
 import Notification from '@/components/Notification.vue'
 import { langStore } from '@/store/languageStore'
 import { authStore } from '@/store/authStore'
 
+const route = useRoute()
 const isMobile = ref(window.innerWidth <= 768)
 const updateBreakpoint = () => { isMobile.value = window.innerWidth <= 768 }
+
+// NAVIGATION VISIBILITY LOGIC
+// We hide sidebar/bottom-nav on Landing page (/) and Login page (/login)
+const showNavigation = computed(() => {
+  return route.path !== '/' && route.path !== '/login'
+})
 
 onMounted(() => {
   window.addEventListener('resize', updateBreakpoint)
@@ -89,6 +97,7 @@ onUnmounted(() => { window.removeEventListener('resize', updateBreakpoint) })
 </script>
 
 <style>
+/* CSS is consistent with your premium dark theme */
 :root {
   --primary-green: #22C55E;
   --bg-dark: #0F172A;
