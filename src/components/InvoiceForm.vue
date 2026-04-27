@@ -17,6 +17,7 @@
     </div>
     
     <form @submit.prevent="handleSubmit" class="styled-form">
+      <!-- Client Section -->
       <section class="form-section">
         <label class="field-label">{{ langStore.t('clientName') }}</label>
         <div class="input-wrapper">
@@ -24,33 +25,61 @@
         </div>
       </section>
 
-      <section class="form-section">
-        <label class="field-label">Items</label>
-        <div v-for="(item, index) in form.items" :key="index" class="item-row rounded-card">
-          <div class="form-row">
-            <div class="input-group flex-2">
-              <input v-model="item.name" required placeholder="Item name" />
+      <!-- Items Section -->
+      <section class="form-section items-section">
+        <div class="items-header">
+          <span class="col-name">Item Description</span>
+          <span class="col-qty">Qty</span>
+          <span class="col-unit">Unit</span>
+          <span class="col-price">Price</span>
+          <span class="col-action"></span>
+        </div>
+
+        <div v-for="(item, index) in form.items" :key="index" class="item-row">
+          <div class="item-inputs">
+            <div class="input-group col-name">
+              <input v-model="item.name" required placeholder="e.g. Website Design" />
             </div>
-            <div class="input-group flex-1">
-              <input type="number" v-model.number="item.quantity" required min="1" placeholder="Qty" />
+            <div class="input-group col-qty">
+              <input type="number" v-model.number="item.quantity" required min="1" placeholder="1" />
             </div>
-            <div class="input-group flex-1">
-              <input type="number" v-model.number="item.price" required min="0" placeholder="Price" />
+            <div class="input-group col-unit">
+              <input v-model="item.unit" required placeholder="pcs" />
             </div>
-            <button type="button" class="btn-remove" @click="removeItem(index)" v-if="form.items.length > 1">×</button>
+            <div class="input-group col-price">
+              <input type="number" v-model.number="item.price" required min="0" step="0.01" :placeholder="'0.00 ' + langStore.currency" />
+            </div>
+            <div class="col-action">
+              <button type="button" class="btn-remove" @click="removeItem(index)" v-if="form.items.length > 1" title="Remove Item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
           </div>
         </div>
-        <button type="button" class="btn-add" @click="addItem">+ Add Item</button>
+
+        <button type="button" class="btn-add" @click="addItem">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add Another Item
+        </button>
       </section>
 
+      <!-- Summary Section -->
       <div class="summary-card">
-        <span class="summary-label">{{ langStore.t('total') }}</span>
-        <span class="summary-value">{{ langStore.currency }} {{ totalAmount.toLocaleString() }}</span>
+        <div class="summary-row">
+          <span class="summary-label">Subtotal</span>
+          <span class="summary-value">{{ langStore.currency }} {{ totalAmount.toLocaleString() }}</span>
+        </div>
+        <div class="summary-row total-row">
+          <span class="summary-label">{{ langStore.t('total') }}</span>
+          <span class="summary-value">{{ langStore.currency }} {{ totalAmount.toLocaleString() }}</span>
+        </div>
       </div>
 
+      <!-- Footer Actions -->
       <div class="form-actions">
         <button type="submit" class="btn-save" :disabled="isProcessing">
-          {{ isProcessing ? langStore.t('processing') : langStore.t('save') }}
+          <span v-if="isProcessing">{{ langStore.t('processing') }}</span>
+          <span v-else>{{ langStore.t('save') }}</span>
         </button>
         <button type="button" @click="$router.push('/')" class="btn-cancel" :disabled="isProcessing">
           {{ langStore.t('cancel') }}
@@ -78,22 +107,35 @@ const showSuccess = ref(false)
 
 const form = reactive({
   clientName: '',
-  items: [{ name: '', quantity: 1, price: 0 }]
+  items: [
+    { name: '', quantity: 1, unit: 'pcs', price: 0 }
+  ],
+  mode: langStore.businessMode
 })
 
-const addItem = () => form.items.push({ name: '', quantity: 1, price: 0 })
-const removeItem = (index) => form.items.splice(index, 1)
+const addItem = () => {
+  form.items.push({ name: '', quantity: 1, unit: 'pcs', price: 0 })
+}
 
-const totalAmount = computed(() => 
-  form.items.reduce((sum, item) => sum + (item.quantity * item.price), 0)
-)
+const removeItem = (index) => {
+  form.items.splice(index, 1)
+}
+
+const totalAmount = computed(() => {
+  return form.items.reduce((sum, item) => sum + (Number(item.quantity || 0) * Number(item.price || 0)), 0)
+})
 
 onMounted(() => {
   if (props.invoice) { 
     // Migrate old invoices to new items structure if needed
     if (props.invoice.itemName) {
       form.clientName = props.invoice.clientName
-      form.items = [{ name: props.invoice.itemName, quantity: props.invoice.quantity, price: props.invoice.price }]
+      form.items = [{ 
+        name: props.invoice.itemName, 
+        quantity: props.invoice.quantity || 1, 
+        unit: props.invoice.unit || 'pcs', 
+        price: props.invoice.price || 0 
+      }]
     } else {
       Object.assign(form, props.invoice)
     }
@@ -102,8 +144,8 @@ onMounted(() => {
 
 const handleSubmit = async () => {
   if (isProcessing.value) return
-  isProcessing.value = true
   
+  isProcessing.value = true
   const data = { 
     ...form, 
     total: totalAmount.value,
@@ -118,14 +160,17 @@ const handleSubmit = async () => {
     } else {
       const addedInvoice = await invoiceStore.addInvoice(data)
       showSuccess.value = true
+      
       setTimeout(() => {
         generateInvoicePDF(addedInvoice, langStore.t)
-        setTimeout(() => router.push('/'), 1500)
+        setTimeout(() => {
+          router.push('/')
+        }, 1500)
       }, 500)
     }
   } catch (error) {
-    console.error(error)
-    alert("Error saving invoice.")
+    console.error("Failed to save invoice:", error)
+    alert("Error saving invoice. Please try again.")
   } finally {
     isProcessing.value = false
   }
@@ -133,19 +178,235 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.invoice-form-container { max-width: 600px; margin: 0 auto; padding: 1rem; }
-.form-header { margin-bottom: 2rem; }
-.form-section { margin-bottom: 1.5rem; }
-.field-label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--color-text-secondary); margin-bottom: 8px; text-transform: uppercase; }
-.input-wrapper input { width: 100%; background: var(--color-surface); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 14px; border-radius: 12px; }
-.item-row { padding: 15px; margin-bottom: 10px; background: rgba(255,255,255,0.03); }
-.form-row { display: flex; gap: 10px; align-items: center; }
-.input-group input { width: 100%; background: var(--color-surface); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 10px; border-radius: 8px; }
-.btn-remove { background: #ef4444; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; }
-.btn-add { background: var(--color-primary); color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin-top: 10px; }
-.summary-card { background: var(--color-surface); padding: 20px; border-radius: 16px; display: flex; justify-content: space-between; margin: 2rem 0; border: 1px solid rgba(255,255,255,0.05); }
-.summary-value { font-size: 1.5rem; font-weight: 800; color: #fff; }
-.form-actions { display: flex; flex-direction: column; gap: 12px; }
-.btn-save { background: var(--color-primary); color: #fff; border: none; padding: 16px; border-radius: 14px; font-weight: 700; cursor: pointer; }
-.btn-cancel { background: rgba(255,255,255,0.05); color: var(--color-text-secondary); border: none; padding: 14px; border-radius: 14px; cursor: pointer; }
+.invoice-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.form-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 1.75rem;
+  color: #fff;
+  font-weight: 800;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--color-primary);
+  background: rgba(255,255,255,0.02);
+  outline: none;
+}
+
+/* Items Table Layout */
+.items-section {
+  background: var(--color-surface);
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.items-header {
+  display: flex;
+  gap: 12px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 15px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.item-row {
+  margin-bottom: 12px;
+}
+
+.item-inputs {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.col-name { flex: 3; }
+.col-qty { flex: 0 0 70px; }
+.col-unit { flex: 0 0 80px; }
+.col-price { flex: 1.5; }
+.col-action { flex: 0 0 32px; }
+
+.input-group input {
+  width: 100%;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.input-group input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.btn-remove {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-remove:hover {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-add {
+  margin-top: 15px;
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--color-primary);
+  border: 1px dashed var(--color-primary);
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-add:hover {
+  background: var(--color-primary);
+  color: #fff;
+  border-style: solid;
+}
+
+/* Summary Card */
+.summary-card {
+  background: var(--color-surface);
+  padding: 24px;
+  border-radius: 20px;
+  margin: 2rem 0;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-secondary);
+}
+
+.total-row {
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+.total-row .summary-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* Actions */
+.form-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-save {
+  flex: 2;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 18px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.btn-cancel {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  color: var(--color-text-secondary);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 18px;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mr-1 { margin-right: 8px; }
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+  .items-header { display: none; }
+  .item-inputs {
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.02);
+    padding: 15px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .col-name { flex: 0 0 100%; }
+  .col-qty { flex: 1; }
+  .col-unit { flex: 1; }
+  .col-price { flex: 2; }
+  .form-actions { flex-direction: column; }
+}
+
+/* Transitions */
+.pop-enter-active { animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
 </style>

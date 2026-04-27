@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Home from '@/views/Home.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import CreateInvoice from '@/views/CreateInvoice.vue'
 import EditInvoice from '@/views/EditInvoice.vue'
@@ -9,8 +10,9 @@ import Login from '@/views/Login.vue'
 import { authStore } from '@/store/authStore'
 
 const routes = [
+  { path: '/', name: 'Home', component: Home },
   { path: '/login', name: 'Login', component: Login },
-  { path: '/', name: 'Dashboard', component: Dashboard, meta: { requiresAuth: true } },
+  { path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: { requiresAuth: true } },
   { path: '/history', name: 'History', component: History, meta: { requiresAuth: true } },
   { path: '/reports', name: 'Reports', component: Reports, meta: { requiresAuth: true } },
   { path: '/create', name: 'CreateInvoice', component: CreateInvoice, meta: { requiresAuth: true } },
@@ -38,7 +40,9 @@ router.beforeEach(async (to, from, next) => {
   if (requiresAuth && !authStore.user) {
     next('/login')
   } else if (to.path === '/login' && authStore.user) {
-    next('/')
+    next('/dashboard')
+  } else if (to.path === '/' && authStore.user) {
+    next('/dashboard')
   } else {
     next()
   }
