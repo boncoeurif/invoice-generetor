@@ -35,7 +35,9 @@
     </div>
 
     <div v-else class="empty-state">
-      <div class="empty-icon">🗑️</div>
+      <div class="empty-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+      </div>
       <h3>{{ langStore.t('emptyRecycleBin') }}</h3>
       <p>{{ langStore.t('emptyRecycleBinText') }}</p>
     </div>
@@ -61,106 +63,23 @@ const permanentlyDelete = async (id) => {
 </script>
 
 <style scoped>
-.recycle-bin-view {
-  padding: 1rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.page-header {
-  margin-bottom: 2rem;
-}
-
-.page-header h1 {
-  font-size: 2rem;
-  color: #fff;
-}
-
-.page-header p {
-  color: var(--color-text-secondary);
-}
-
-.invoice-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.invoice-card {
-  background: var(--color-surface);
-  padding: 24px;
-  border: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.client-info h3 {
-  margin: 5px 0;
-  font-size: 1.15rem;
-  color: #fff;
-}
-
-.invoice-id {
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  text-transform: uppercase;
-}
-
-.date {
-  font-size: 0.85rem;
-  color: #ef4444;
-}
-
-.card-details {
-  padding: 15px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-}
-
+.recycle-bin-view { padding: 1rem; max-width: 1000px; margin: 0 auto; }
+.page-header { margin-bottom: 2rem; }
+.page-header h1 { font-size: 2rem; color: #fff; }
+.page-header p { color: var(--color-text-secondary); }
+.invoice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+.invoice-card { background: var(--color-surface); padding: 24px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 20px; }
+.client-info h3 { margin: 5px 0; font-size: 1.15rem; color: #fff; }
+.invoice-id { font-size: 0.75rem; font-weight: 800; color: var(--color-primary); text-transform: uppercase; }
+.date { font-size: 0.85rem; color: #ef4444; }
+.card-details { padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.detail-item { display: flex; justify-content: space-between; }
 .detail-item .label { color: var(--color-text-secondary); }
 .detail-item .value { color: #fff; font-weight: 700; }
-
-.card-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.btn {
-  flex: 1;
-  padding: 10px;
-  border-radius: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.btn-secondary {
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-}
-
-.btn-delete {
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
-  flex: 0 0 45px !important;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 100px 20px;
-  color: var(--color-text-secondary);
-}
-
-.empty-icon { font-size: 4rem; margin-bottom: 20px; }
+.card-actions { display: flex; gap: 10px; }
+.btn { flex: 1; padding: 10px; border-radius: 12px; font-weight: 700; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-secondary { background: rgba(255,255,255,0.05); color: #fff; }
+.btn-delete { background: rgba(239, 68, 68, 0.1); color: #ef4444; flex: 0 0 45px !important; }
+.empty-state { text-align: center; padding: 100px 20px; color: var(--color-text-secondary); }
+.empty-icon { color: rgba(255,255,255,0.2); margin-bottom: 20px; }
 </style>
