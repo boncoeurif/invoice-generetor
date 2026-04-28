@@ -66,8 +66,8 @@
       </template>
     </main>
 
-    <!-- Floating Action Button -->
-    <button class="fab" @click="goToCreateInvoice">
+    <!-- Floating Action Button (Mobile Only) -->
+    <button class="fab mobile-only" @click="goToCreateInvoice">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
     </button>
   </div>
