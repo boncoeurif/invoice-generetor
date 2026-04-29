@@ -9,8 +9,8 @@
         <span>Invoxa</span>
       </div>
       <div class="nav-links">
-        <router-link to="/login" class="btn-cta-outline">Login</router-link>
-        <router-link to="/login" class="btn-cta-primary small">Get Started</router-link>
+        <router-link to="/login" class="btn-cta-outline">{{ langStore.t('login') }}</router-link>
+        <router-link to="/login" class="btn-cta-primary small">{{ langStore.t('getStarted') }}</router-link>
       </div>
     </nav>
 
@@ -19,14 +19,14 @@
       <div class="hero-content">
         <div class="badge">
           <span class="pulse-dot"></span>
-          PRO INVOICING MADE SIMPLE
+          {{ langStore.t('proInvoicing') }}
         </div>
-        <h1>Generate Professional Invoices in <span class="text-gradient">Seconds.</span></h1>
-        <p>The ultimate invoicing tool for freelancers, small businesses, and professionals. Fast, secure, and ready for deployment.</p>
+        <h1>{{ langStore.t('homeTitle') }} <span class="text-gradient">{{ langStore.t('homeTitleSuffix') }}</span></h1>
+        <p>{{ langStore.t('homeSubtitle') }}</p>
         
         <div class="cta-group">
           <router-link to="/login" class="btn-cta-primary">
-            Get Started for Free
+            {{ langStore.t('getStartedFree') }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </router-link>
           <div class="trust-badge">
@@ -35,7 +35,7 @@
               <div class="avatar" style="background-color: #10b981;"></div>
               <div class="avatar" style="background-color: #f59e0b;"></div>
             </div>
-            <span>Trusted by 10,000+ users</span>
+            <span>{{ langStore.t('trustedBy') }}</span>
           </div>
         </div>
       </div>
@@ -44,11 +44,11 @@
         <div class="visual-wrapper">
           <div class="floating-card c1">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="green"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            <span>Paid Successfully</span>
+            <span>{{ langStore.t('paidSuccess') }}</span>
           </div>
           <div class="floating-card c2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="blue"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            <span>$4,250.00</span>
+            <span>{{ langStore.currency }}4,250.00</span>
           </div>
           <div class="preview-card">
             <div class="preview-header">
@@ -65,30 +65,30 @@
     <!-- Features -->
     <section id="features" class="features-section">
       <div class="section-title">
-        <h2>Everything you need to <span class="text-gradient">grow.</span></h2>
-        <p>Built for speed and professional output.</p>
+        <h2>{{ langStore.t('everythingNeed') }} <span class="text-gradient">{{ langStore.t('grow') }}</span></h2>
+        <p>{{ langStore.t('builtForSpeed') }}</p>
       </div>
       <div class="features-grid">
         <div class="feature-card">
           <div class="f-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           </div>
-          <h3>Multi-Item Invoices</h3>
-          <p>Add unlimited products or services to a single invoice with dynamic calculations.</p>
+          <h3>{{ langStore.t('feature1Title') }}</h3>
+          <p>{{ langStore.t('feature1Desc') }}</p>
         </div>
         <div class="feature-card">
           <div class="f-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           </div>
-          <h3>Instant PDF Export</h3>
-          <p>Generate clean, professional PDFs optimized for printing or digital sharing.</p>
+          <h3>{{ langStore.t('feature2Title') }}</h3>
+          <p>{{ langStore.t('feature2Desc') }}</p>
         </div>
         <div class="feature-card">
           <div class="f-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
           </div>
-          <h3>Real-time Analytics</h3>
-          <p>Track your business performance with live charts and automated earnings summaries.</p>
+          <h3>{{ langStore.t('feature3Title') }}</h3>
+          <p>{{ langStore.t('feature3Desc') }}</p>
         </div>
       </div>
     </section>
@@ -101,6 +101,7 @@
 
 <script setup>
 import { authStore } from '@/store/authStore'
+import { langStore } from '@/store/languageStore'
 </script>
 
 <style scoped>

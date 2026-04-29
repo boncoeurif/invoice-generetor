@@ -20,18 +20,18 @@
 
         <!-- Bottom Nav (Mobile Only) -->
         <nav v-if="isMobile" class="bottom-nav">
+          <router-link to="/" class="nav-item">
+            <div class="nav-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <span>{{ langStore.t('home') }}</span>
+          </router-link>
+
           <router-link to="/dashboard" class="nav-item">
             <div class="nav-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
             </div>
             <span>{{ langStore.t('dashboard') }}</span>
-          </router-link>
-          
-          <router-link to="/history" class="nav-item">
-            <div class="nav-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            </div>
-            <span>{{ langStore.t('actions') }}</span>
           </router-link>
 
           <router-link to="/create" class="nav-item create-nav-btn">
