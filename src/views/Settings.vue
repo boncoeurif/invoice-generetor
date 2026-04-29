@@ -71,154 +71,181 @@ const modes = [
 
 <style scoped>
 .settings-view {
-  padding: 1rem;
-  max-width: 800px;
+  padding: 1.5rem;
+  max-width: 900px;
   margin: 0 auto;
+  padding-bottom: 100px;
 }
 
 .settings-header {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .settings-header h1 {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   color: #fff;
+  font-weight: 900;
 }
 
 .settings-card {
   background: var(--color-surface);
-  border-radius: 20px;
-  padding: 24px;
+  border-radius: 24px;
+  padding: 32px;
   border: 1px solid rgba(255,255,255,0.05);
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .setting-item label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
 }
 
 .choice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
 }
 
 .choice-grid button {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.08);
   color: #fff;
-  padding: 14px;
-  border-radius: 12px;
-  font-weight: 600;
+  padding: 16px;
+  border-radius: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95rem;
+}
+
+.choice-grid button:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
 }
 
 .choice-grid button.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  transform: translateY(-2px);
 }
 
 .mode-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }
 
 .mode-option {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.08);
-  padding: 20px;
-  border-radius: 16px;
+  padding: 24px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 16px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
 }
 
 .mode-option:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.05);
   border-color: rgba(255,255,255,0.2);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 }
 
 .mode-option.active {
-  background: rgba(34, 197, 94, 0.1);
+  background: rgba(34, 197, 94, 0.08);
   border-color: var(--color-primary);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  transform: translateY(-4px);
 }
 
 .mode-icon :deep(svg) {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   color: var(--color-text-secondary);
-  transition: color 0.2s;
+  transition: all 0.3s;
+}
+
+.mode-option:hover .mode-icon :deep(svg) {
+  color: #fff;
+  transform: scale(1.1);
 }
 
 .mode-option.active .mode-icon :deep(svg) {
   color: var(--color-primary);
+  transform: scale(1.1);
 }
 
 .mode-name {
   color: #fff;
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 800;
+  font-size: 1rem;
 }
 
 .footer-info {
-  margin-top: 3rem;
+  margin-top: 4rem;
   text-align: center;
   color: var(--color-text-secondary);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .auth-actions {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .btn-logout {
   width: 100%;
-  background: rgba(239, 68, 68, 0.08);
+  background: rgba(239, 68, 68, 0.05);
   color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.2);
-  padding: 16px;
-  border-radius: 12px;
-  font-weight: 700;
+  padding: 18px;
+  border-radius: 16px;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.2s;
+  font-size: 1.1rem;
+  transition: all 0.3s;
 }
 
 .btn-logout:hover {
-  background: rgba(239, 68, 68, 0.15);
+  background: rgba(239, 68, 68, 0.12);
+  border-color: #ef4444;
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .mode-grid {
     grid-template-columns: 1fr;
   }
   .mode-option {
     flex-direction: row;
     justify-content: flex-start;
-    padding: 16px;
+    padding: 18px 24px;
+    gap: 20px;
+  }
+  .settings-card {
+    padding: 24px 20px;
   }
 }
 </style>

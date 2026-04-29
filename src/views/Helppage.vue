@@ -98,49 +98,54 @@ const submitFeedback = () => {
 
 <style scoped>
 .helppage-view {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding-bottom: 2rem;
+  gap: 2rem;
+  padding: 1.5rem;
+  padding-bottom: 100px;
 }
 
 .page-header h1 {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   color: #fff;
+  font-weight: 900;
   margin: 0;
 }
 
 .help-card {
-  background: var(--surface-dark);
-  border-radius: 20px;
-  padding: 24px;
+  background: var(--color-surface);
+  border-radius: 24px;
+  padding: 32px;
   border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .card-header h2 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: #fff;
   margin: 0;
+  font-weight: 800;
 }
 
 .header-icon {
   color: var(--primary-green);
+  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.3));
 }
 
 .intro-text {
   color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
 }
 
 .steps-list {
@@ -151,97 +156,120 @@ const submitFeedback = () => {
 
 .step-item {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   background: rgba(255,255,255,0.02);
-  padding: 16px;
-  border-radius: 14px;
+  padding: 24px;
+  border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.03);
+  transition: transform 0.3s;
+}
+
+.step-item:hover {
+  transform: translateX(10px);
+  background: rgba(255,255,255,0.04);
 }
 
 .step-number {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background: var(--primary-green);
   color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 0.8rem;
+  font-weight: 900;
+  font-size: 0.9rem;
   flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.4);
 }
 
 .step-content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .step-content strong {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: #fff;
 }
 
 .step-content span {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 /* Form Styles */
 .feedback-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .form-group label {
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 800;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
 }
 
 .form-group input, .form-group textarea {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
   color: #fff;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 14px;
   font-size: 1rem;
+  transition: all 0.2s;
 }
 
 .form-group input:focus, .form-group textarea:focus {
   border-color: var(--primary-green);
+  background: rgba(255,255,255,0.04);
   outline: none;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
 }
 
 .btn-submit {
   background: var(--primary-green);
   color: #fff;
   border: none;
-  padding: 16px;
-  border-radius: 14px;
-  font-weight: 700;
+  padding: 18px;
+  border-radius: 16px;
+  font-weight: 800;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
 }
 
 @media (max-width: 768px) {
   .helppage-view {
-    padding: 0.5rem;
+    padding: 1rem;
   }
   
   .help-card {
-    padding: 20px;
+    padding: 24px;
+  }
+  
+  .step-item {
+    padding: 16px;
   }
 }
 </style>

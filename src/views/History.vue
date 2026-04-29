@@ -18,7 +18,10 @@
           <div class="client-info">
             <span class="invoice-id">#{{ invoice.id.slice(-4).toUpperCase() }}</span>
             <h3>{{ invoice.clientName }}</h3>
-            <span class="date">{{ invoice.date }}</span>
+            <span class="date">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              {{ invoice.date }}
+            </span>
           </div>
           <div class="status-section">
             <span class="status-badge" :class="invoice.status?.toLowerCase() || 'paid'">{{ invoice.status || 'Paid' }}</span>
@@ -31,26 +34,27 @@
             <span class="value">{{ Number(invoice.total || 0).toLocaleString() }} {{ langStore.currency }}</span>
           </div>
           <div class="detail-item">
-            <span class="label">Items</span>
-            <span class="value">{{ invoice.itemName }} ({{ invoice.quantity }} {{ invoice.unit }})</span>
+            <span class="label">Item</span>
+            <span class="value text-truncate">{{ invoice.items?.[0]?.name || invoice.itemName }}</span>
           </div>
         </div>
 
         <div class="card-actions">
-          <button class="btn btn-secondary btn-icon" @click="downloadInvoice(invoice)">
+          <button class="btn btn-action-secondary" @click="downloadInvoice(invoice)" title="Download PDF">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            PDF
+            <span>PDF</span>
           </button>
-          <button class="btn btn-secondary btn-icon" @click="$router.push(`/edit/${invoice.id}`)">
+          <button class="btn btn-action-secondary" @click="$router.push(`/edit/${invoice.id}`)" title="Edit Invoice">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            Edit
+            <span>Edit</span>
           </button>
-          <button class="btn btn-delete btn-icon" @click="confirmDelete(invoice.id)">
+          <button class="btn btn-action-delete" @click="confirmDelete(invoice.id)" title="Delete">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
           </button>
         </div>
       </div>
     </div>
+
 
     <div v-else class="empty-state">
       <div class="empty-icon">
@@ -95,31 +99,22 @@ const confirmDelete = async (id) => {
 
 <style scoped>
 .history-view {
-  padding: 1rem;
-  max-width: 1000px;
+  padding: 1.5rem;
+  max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 }
 
-.page-header {
-  margin-bottom: 2rem;
-}
-
-.page-header h1 {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-.page-header p {
-  color: var(--color-text-secondary);
-}
+.page-header { margin-bottom: 2.5rem; }
+.page-header h1 { font-size: 2.25rem; color: #fff; margin-bottom: 0.5rem; font-weight: 900; }
+.page-header p { color: var(--color-text-secondary); font-size: 1rem; }
 
 .search-bar {
   background: var(--color-surface);
-  padding: 15px;
-  margin-bottom: 2rem;
+  padding: 12px;
+  margin-bottom: 2.5rem;
   border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 18px;
 }
 
 .search-input-wrapper {
@@ -127,28 +122,24 @@ const confirmDelete = async (id) => {
   align-items: center;
   gap: 15px;
   background: rgba(0,0,0,0.2);
-  padding: 12px 18px;
-  border-radius: 12px;
+  padding: 12px 20px;
+  border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.05);
+  transition: border-color 0.2s;
 }
 
-.search-icon {
-  color: var(--color-text-secondary);
-}
-
-.search-input-wrapper input {
-  background: none;
-  border: none;
-  color: #fff;
-  width: 100%;
-  font-size: 1rem;
-  outline: none;
-}
+.search-input-wrapper:focus-within { border-color: var(--color-primary); }
+.search-icon { color: var(--color-text-secondary); }
+.search-input-wrapper input { background: none; border: none; color: #fff; width: 100%; font-size: 1rem; outline: none; }
 
 .invoice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 400px) {
+  .invoice-grid { grid-template-columns: 1fr; }
 }
 
 .invoice-card {
@@ -157,111 +148,84 @@ const confirmDelete = async (id) => {
   border: 1px solid rgba(255,255,255,0.05);
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  transition: all 0.3s ease;
+  gap: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 24px;
 }
 
 .invoice-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--color-primary);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transform: translateY(-8px);
+  border-color: rgba(34, 197, 94, 0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.client-info h3 {
-  margin: 5px 0;
-  font-size: 1.15rem;
-  color: #fff;
-}
-
-.invoice-id {
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.date {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  font-weight: 500;
-}
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.client-info h3 { margin: 8px 0; font-size: 1.25rem; color: #fff; font-weight: 800; }
+.invoice-id { font-size: 0.7rem; font-weight: 900; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.1em; }
+.date { font-size: 0.8rem; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px; font-weight: 600; }
 
 .status-badge {
   padding: 6px 12px;
   border-radius: 10px;
-  font-size: 0.7rem;
-  font-weight: 800;
+  font-size: 0.65rem;
+  font-weight: 900;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
-
-.status-badge.paid { background-color: rgba(34, 197, 94, 0.1); color: #22C55E; }
-.status-badge.pending { background-color: rgba(234, 179, 8, 0.1); color: #EAB308; }
+.status-badge.paid { background: rgba(34, 197, 94, 0.1); color: #22C55E; }
 
 .card-details {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px 0;
+  gap: 14px;
+  padding: 20px 0;
   border-top: 1px solid rgba(255,255,255,0.05);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.95rem;
-}
+.detail-item { display: flex; justify-content: space-between; align-items: center; }
+.detail-item .label { color: var(--color-text-secondary); font-size: 0.85rem; font-weight: 600; }
+.detail-item .value { color: #fff; font-weight: 800; font-size: 1rem; }
+.text-truncate { max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.detail-item .label { color: var(--color-text-secondary); }
-.detail-item .value { color: #fff; font-weight: 700; }
+.card-actions { display: flex; gap: 10px; }
 
-.card-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.card-actions .btn {
+.btn-action-secondary {
   flex: 1;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
   font-size: 0.85rem;
-  padding: 10px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.btn-delete {
+.btn-action-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+
+.btn-action-delete {
   background: rgba(239, 68, 68, 0.08);
   color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.2);
-  flex: 0 0 48px !important;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
 }
 
-.btn-delete:hover {
-  background: rgba(239, 68, 68, 0.2);
-}
+.btn-action-delete:hover { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
 
-.empty-state {
-  text-align: center;
-  padding: 100px 20px;
-  color: var(--color-text-secondary);
-}
-
-.empty-icon {
-  margin-bottom: 24px;
-}
-
-@media (max-width: 480px) {
-  .invoice-grid {
-    grid-template-columns: 1fr;
-  }
-}
+.empty-state { text-align: center; padding: 100px 20px; color: var(--color-text-secondary); }
+.empty-icon { margin-bottom: 24px; opacity: 0.5; }
 </style>

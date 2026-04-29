@@ -9,12 +9,22 @@
 
     <div class="report-summary rounded-card">
       <div class="summary-item">
-        <span class="label">{{ langStore.t('totalTransactions') }}</span>
-        <span class="value">{{ filteredInvoices.length }}</span>
+        <div class="item-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
+        <div class="item-text">
+          <span class="label">{{ langStore.t('totalTransactions') }}</span>
+          <span class="value">{{ filteredInvoices.length }}</span>
+        </div>
       </div>
       <div class="summary-item">
-        <span class="label">{{ langStore.t('grandTotals') }}</span>
-        <span class="value">{{ langStore.currency }} {{ grandTotal.toLocaleString() }}</span>
+        <div class="item-icon earnings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <div class="item-text">
+          <span class="label">{{ langStore.t('grandTotals') }}</span>
+          <span class="value">{{ langStore.currency }} {{ grandTotal.toLocaleString() }}</span>
+        </div>
       </div>
     </div>
 
@@ -62,18 +72,83 @@ const grandTotal = computed(() => {
 </script>
 
 <style scoped>
-.reports-view { padding: 1rem; max-width: 900px; margin: 0 auto; }
-.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-.page-header h1 { color: #fff; }
-.date-selector input { background: var(--color-surface); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; }
+.reports-view { padding: 1.5rem; max-width: 1000px; margin: 0 auto; padding-bottom: 100px; }
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 20px; }
+.page-header h1 { font-size: 2.25rem; color: #fff; font-weight: 900; margin: 0; }
 
-.report-summary { display: grid; grid-template-columns: 1fr 1fr; padding: 24px; gap: 20px; margin-bottom: 20px; }
-.summary-item { display: flex; flex-direction: column; }
-.summary-item .label { color: var(--color-text-secondary); font-size: 0.8rem; text-transform: uppercase; }
-.summary-item .value { font-size: 1.5rem; font-weight: 800; color: var(--color-primary); }
+.date-selector input { 
+  background: var(--color-surface); 
+  color: #fff; 
+  border: 1px solid rgba(255,255,255,0.1); 
+  padding: 12px 16px; 
+  border-radius: 12px; 
+  font-family: inherit;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.date-selector input:focus { border-color: var(--color-primary); }
 
-.report-table { padding: 20px; overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; color: #fff; }
-th { text-align: left; color: var(--color-text-secondary); padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.report-summary { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+  padding: 30px; 
+  gap: 30px; 
+  margin-bottom: 30px; 
+  background: var(--color-surface);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.summary-item { display: flex; align-items: center; gap: 20px; }
+.item-icon { 
+  width: 56px; 
+  height: 56px; 
+  background: rgba(34, 197, 94, 0.1); 
+  color: var(--color-primary); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+.item-icon.earnings { background: rgba(37, 99, 235, 0.1); color: #3b82f6; }
+
+.item-text { display: flex; flex-direction: column; gap: 4px; }
+.item-text .label { color: var(--color-text-secondary); font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em; }
+.item-text .value { font-size: 1.75rem; font-weight: 900; color: #fff; line-height: 1.2; }
+
+.report-table { 
+  padding: 0; 
+  overflow: hidden; 
+  background: var(--color-surface);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.table-wrapper { overflow-x: auto; padding: 12px; }
+
+table { width: 100%; border-collapse: separate; border-spacing: 0; color: #fff; min-width: 600px; }
+th { 
+  text-align: left; 
+  color: var(--color-text-secondary); 
+  padding: 16px 20px; 
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+td { 
+  padding: 20px; 
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.01); }
+
+@media (max-width: 600px) {
+  .page-header { flex-direction: column; align-items: flex-start; }
+  .report-summary { padding: 20px; }
+}
 </style>
