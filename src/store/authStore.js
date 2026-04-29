@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 import { auth, googleProvider } from '@/utils/firebase'
-import { signInWithPopup, onAuthStateChanged, signOut } from 'firebase/auth'
+import { signInWithPopup, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from 'firebase/auth'
 import router from '@/router'
 
 export const authStore = reactive({
@@ -11,10 +11,12 @@ export const authStore = reactive({
   async loginWithGoogle() {
     try {
       console.log("Attempting Google Login...")
+      // Ensure persistence is set before login
+      await setPersistence(auth, browserLocalPersistence)
       const result = await signInWithPopup(auth, googleProvider)
       this.user = result.user
       console.log("Login successful:", this.user.displayName)
-      router.push('/')
+      router.push('/dashboard')
     } catch (error) {
       console.error("Login failed detailed error:", error)
       
@@ -41,19 +43,9 @@ export const authStore = reactive({
   }
 })
 
-// Robust initialization with a safety timeout
+// Initialize Auth
 authStore.initPromise = new Promise((resolve) => {
-  // Set a safety timeout of 3 seconds
-  const timeout = setTimeout(() => {
-    if (!authStore.isInitialized) {
-      console.warn("Auth initialization timed out. Proceeding as guest.")
-      authStore.isInitialized = true
-      resolve(null)
-    }
-  }, 3000)
-
   onAuthStateChanged(auth, (user) => {
-    clearTimeout(timeout)
     authStore.user = user
     authStore.isInitialized = true
     console.log("Auth State Changed. User:", user ? user.displayName : "Logged Out")

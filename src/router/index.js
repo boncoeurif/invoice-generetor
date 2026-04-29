@@ -39,11 +39,9 @@ router.beforeEach(async (to, from, next) => {
 
   if (requiresAuth && !authStore.user) {
     next('/login')
-  } else if (to.path === '/login' && authStore.user) {
+  } else if ((to.path === '/login' || to.path === '/') && authStore.user) {
     next('/dashboard')
   } else {
-    // We REMOVED the auto-redirect from '/' to '/dashboard' 
-    // so you can actually see the Home page.
     next()
   }
 })

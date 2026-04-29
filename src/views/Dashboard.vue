@@ -312,7 +312,7 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   border: none;
   box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
   cursor: pointer;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
@@ -324,5 +324,6 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   .dashboard-content-area { padding: 16px; gap: 16px; }
   .summary-cards-section { grid-template-columns: 1fr; }
   .navbar { padding: 16px; }
+  .fab { display: flex; }
 }
 </style>
