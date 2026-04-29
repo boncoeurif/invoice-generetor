@@ -20,7 +20,7 @@
 
         <div class="card-details">
           <div class="detail-item">
-            <span class="label">Amount</span>
+            <span class="label">{{ langStore.t('amount') }}</span>
             <span class="value">{{ Number(invoice.total || 0).toLocaleString() }} {{ langStore.currency }}</span>
           </div>
         </div>

@@ -15,44 +15,44 @@
 
       <section class="items-section">
         <div class="items-header">
-          <span>{{ langStore.t('items') || 'Item Details' }}</span>
+          <span>{{ langStore.t('itemDetails') }}</span>
         </div>
 
         <div v-for="(item, index) in form.items" :key="index" class="item-card">
           <div class="item-card-header">
-            <span class="item-number">Item #{{ index + 1 }}</span>
+            <span class="item-number">{{ langStore.t('item') }} #{{ index + 1 }}</span>
             <button type="button" class="btn-remove" @click="removeItem(index)" v-if="form.items.length > 1">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-              Remove
+              {{ langStore.t('remove') }}
             </button>
           </div>
           
           <div class="item-grid">
             <div class="input-group description">
-              <label>Description</label>
+              <label>{{ langStore.t('description') }}</label>
               <input v-model="item.name" required placeholder="e.g. Website Design" />
             </div>
 
             <div class="input-group qty">
-              <label>Qty</label>
+              <label>{{ langStore.t('qty') }}</label>
               <input type="number" v-model.number="item.quantity" required min="1" placeholder="1" />
             </div>
 
             <div class="input-group unit">
-              <label>Unit</label>
+              <label>{{ langStore.t('unit') }}</label>
               <input v-model="item.unit" required placeholder="pcs" />
             </div>
 
             <div class="input-group price">
-              <label>Price ({{ langStore.currency }})</label>
+              <label>{{ langStore.t('price') }} ({{ langStore.currency }})</label>
               <input type="number" v-model.number="item.price" required min="0" step="0.01" placeholder="0.00" />
             </div>
           </div>
         </div>
 
         <button type="button" class="btn-add" @click="addItem">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          Add Another Item
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          {{ langStore.t('addItem') }}
         </button>
       </section>
 
@@ -65,7 +65,7 @@
 
       <div class="form-actions">
         <button type="submit" class="btn-save" :disabled="isProcessing">
-          <svg v-if="!isProcessing" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          <svg v-if="!isProcessing" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
           {{ isProcessing ? langStore.t('processing') : langStore.t('save') }}
         </button>
         <button type="button" @click="$router.push('/')" class="btn-cancel" :disabled="isProcessing">
@@ -133,7 +133,7 @@ const handleSubmit = async () => {
       }, 500)
     }
   } catch (error) {
-    alert("Error saving invoice.")
+    alert(langStore.t('errorSaving'))
   } finally {
     isProcessing.value = false
   }
@@ -141,140 +141,145 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.invoice-form-container { max-width: 800px; margin: 0 auto; padding: 20px 15px; padding-bottom: 100px; }
-.form-header h2 { color: #fff; font-size: 1.75rem; margin-bottom: 2rem; }
+.invoice-form-container { max-width: 900px; margin: 0 auto; padding: 30px 20px; padding-bottom: 120px; }
+.form-header h2 { color: #fff; font-size: 2.25rem; margin-bottom: 2.5rem; font-weight: 900; }
 
-.form-section { margin-bottom: 24px; }
-.field-label { display: block; font-size: 0.75rem; font-weight: 800; color: var(--color-text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+.form-section { margin-bottom: 32px; }
+.field-label { display: block; font-size: 0.9rem; font-weight: 800; color: var(--color-text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
 
 .input-wrapper { position: relative; display: flex; align-items: center; }
-.input-icon { position: absolute; left: 16px; color: var(--color-text-secondary); pointer-events: none; }
+.input-icon { position: absolute; left: 20px; color: var(--color-text-secondary); pointer-events: none; width: 22px; height: 22px; }
 .input-wrapper input { 
   width: 100%; 
   background: var(--color-surface); 
-  border: 1px solid rgba(255,255,255,0.1); 
+  border: 2px solid rgba(255,255,255,0.08); 
   color: #fff; 
-  padding: 14px 14px 14px 48px; 
-  border-radius: 14px; 
-  font-size: 1rem;
-  transition: border-color 0.2s;
+  padding: 18px 20px 18px 56px; 
+  border-radius: 18px; 
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: all 0.3s;
 }
-.input-wrapper input:focus { border-color: var(--color-primary); outline: none; }
+.input-wrapper input:focus { border-color: var(--color-primary); outline: none; background: rgba(34, 197, 94, 0.03); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.1); }
 
-.items-section { display: flex; flex-direction: column; gap: 20px; margin-top: 2rem; }
-.items-header { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
-.items-header span { font-size: 0.8rem; font-weight: 800; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.items-section { display: flex; flex-direction: column; gap: 28px; margin-top: 3rem; }
+.items-header { border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
+.items-header span { font-size: 1rem; font-weight: 900; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.1em; }
 
 .item-card { 
-  background: rgba(255,255,255,0.02); 
-  padding: 24px; 
-  border-radius: 20px; 
+  background: rgba(255,255,255,0.03); 
+  padding: 32px; 
+  border-radius: 28px; 
   border: 1px solid rgba(255,255,255,0.05); 
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
-.item-card:hover { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
+.item-card:hover { border-color: rgba(34, 197, 94, 0.2); background: rgba(255,255,255,0.05); }
 
-.item-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.item-number { font-weight: 800; color: var(--color-primary); font-size: 0.9rem; }
+.item-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.item-number { font-weight: 900; color: var(--color-primary); font-size: 1.1rem; }
 
 .btn-remove { 
-  background: rgba(239, 68, 68, 0.1); 
+  background: rgba(239, 68, 68, 0.08); 
   color: #ef4444; 
-  border: 1px solid rgba(239, 68, 68, 0.2); 
-  font-size: 0.75rem; 
-  font-weight: 700; 
+  border: 1px solid rgba(239, 68, 68, 0.15); 
+  font-size: 0.85rem; 
+  font-weight: 800; 
   cursor: pointer; 
-  padding: 6px 12px; 
-  border-radius: 8px;
+  padding: 8px 16px; 
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   transition: all 0.2s;
 }
-.btn-remove:hover { background: rgba(239, 68, 68, 0.2); }
+.btn-remove:hover { background: rgba(239, 68, 68, 0.15); transform: scale(1.05); }
 
 .item-grid { 
   display: grid; 
-  grid-template-columns: 2fr 0.6fr 0.6fr 1fr; 
-  gap: 16px; 
+  grid-template-columns: 2.5fr 0.8fr 0.8fr 1.2fr; 
+  gap: 20px; 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .item-grid { grid-template-columns: 1fr 1fr; }
   .description { grid-column: span 2; }
 }
 
-.input-group { display: flex; flex-direction: column; gap: 8px; }
-.input-group label { font-size: 0.7rem; color: var(--color-text-secondary); font-weight: 700; text-transform: uppercase; }
+.input-group { display: flex; flex-direction: column; gap: 10px; }
+.input-group label { font-size: 0.8rem; color: var(--color-text-secondary); font-weight: 800; text-transform: uppercase; }
 .input-group input { 
   width: 100%; 
-  background: rgba(0,0,0,0.2); 
-  border: 1px solid rgba(255,255,255,0.1); 
+  background: rgba(0,0,0,0.25); 
+  border: 1.5px solid rgba(255,255,255,0.1); 
   color: #fff; 
-  padding: 12px; 
-  border-radius: 10px; 
-  font-size: 0.95rem;
+  padding: 16px; 
+  border-radius: 14px; 
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: border-color 0.2s;
 }
 .input-group input:focus { border-color: var(--color-primary); outline: none; }
 
 .btn-add { 
   background: rgba(34, 197, 94, 0.1); 
   color: var(--color-primary); 
-  border: 1px dashed var(--color-primary); 
-  padding: 16px; 
-  border-radius: 16px; 
-  font-weight: 700; 
-  cursor: pointer; 
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: all 0.2s;
-}
-.btn-add:hover { background: rgba(34, 197, 94, 0.15); transform: translateY(-2px); }
-
-.summary-card-footer { 
-  background: var(--color-surface); 
-  padding: 24px; 
+  border: 2px dashed rgba(34, 197, 94, 0.4); 
+  padding: 20px; 
   border-radius: 20px; 
-  margin: 32px 0; 
-  border: 1px solid rgba(34, 197, 94, 0.3);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-.summary-row { display: flex; justify-content: space-between; align-items: center; }
-.summary-label { color: var(--color-text-secondary); font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
-.summary-value { font-weight: 900; font-size: 1.75rem; color: #fff; }
-
-.form-actions { display: flex; flex-direction: column; gap: 12px; }
-.btn-save { 
-  background: var(--color-primary); 
-  color: #fff; 
-  border: none; 
-  padding: 18px; 
-  border-radius: 16px; 
   font-weight: 800; 
   cursor: pointer; 
+  margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   font-size: 1.1rem;
-  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
-.btn-save:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.btn-add:hover { background: rgba(34, 197, 94, 0.15); border-color: var(--color-primary); transform: translateY(-3px); }
+
+.summary-card-footer { 
+  background: var(--color-surface); 
+  padding: 32px; 
+  border-radius: 28px; 
+  margin: 40px 0; 
+  border: 2px solid rgba(34, 197, 94, 0.25);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+.summary-row { display: flex; justify-content: space-between; align-items: center; }
+.summary-label { color: var(--color-text-secondary); font-weight: 800; text-transform: uppercase; font-size: 1rem; }
+.summary-value { font-weight: 900; font-size: 2.25rem; color: #fff; }
+
+.form-actions { display: flex; flex-direction: column; gap: 15px; }
+.btn-save { 
+  background: var(--color-primary); 
+  color: #fff; 
+  border: none; 
+  padding: 22px; 
+  border-radius: 20px; 
+  font-weight: 900; 
+  cursor: pointer; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.25rem;
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+  transition: all 0.3s;
+}
+.btn-save:hover { transform: translateY(-4px); filter: brightness(1.1); box-shadow: 0 12px 30px rgba(34, 197, 94, 0.5); }
 .btn-save:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 .btn-cancel { 
   background: rgba(255,255,255,0.05); 
   color: var(--color-text-secondary); 
-  border: none; 
-  padding: 16px; 
-  border-radius: 16px; 
+  border: 1px solid rgba(255,255,255,0.08); 
+  padding: 18px; 
+  border-radius: 18px; 
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1rem;
   transition: all 0.2s;
 }
-.btn-cancel:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.btn-cancel:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2); }
 </style>

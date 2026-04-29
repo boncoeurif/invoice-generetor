@@ -2,13 +2,13 @@
   <div class="history-view">
     <header class="page-header">
       <h1>{{ langStore.t('recentInvoices') }}</h1>
-      <p>View and manage all your generated invoices</p>
+      <p>{{ langStore.t('historySubtitle') }}</p>
     </header>
 
     <div class="search-bar rounded-card">
       <div class="search-input-wrapper">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input v-model="searchQuery" placeholder="Search by customer name..." />
+        <input v-model="searchQuery" :placeholder="langStore.t('searchPlaceholder')" />
       </div>
     </div>
 
@@ -30,11 +30,11 @@
 
         <div class="card-details">
           <div class="detail-item">
-            <span class="label">Amount</span>
+            <span class="label">{{ langStore.t('amount') }}</span>
             <span class="value">{{ Number(invoice.total || 0).toLocaleString() }} {{ langStore.currency }}</span>
           </div>
           <div class="detail-item">
-            <span class="label">Item</span>
+            <span class="label">{{ langStore.t('item') }}</span>
             <span class="value text-truncate">{{ invoice.items?.[0]?.name || invoice.itemName }}</span>
           </div>
         </div>
@@ -42,11 +42,11 @@
         <div class="card-actions">
           <button class="btn btn-action-secondary" @click="downloadInvoice(invoice)" title="Download PDF">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>PDF</span>
+            <span>{{ langStore.t('pdf') }}</span>
           </button>
           <button class="btn btn-action-secondary" @click="$router.push(`/edit/${invoice.id}`)" title="Edit Invoice">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            <span>Edit</span>
+            <span>{{ langStore.t('edit') }}</span>
           </button>
           <button class="btn btn-action-delete" @click="confirmDelete(invoice.id)" title="Delete">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
@@ -60,9 +60,9 @@
       <div class="empty-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.2;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
       </div>
-      <p v-if="searchQuery">No invoices matching "{{ searchQuery }}"</p>
-      <p v-else>You haven't created any invoices yet.</p>
-      <button class="btn btn-primary" @click="$router.push('/create')">Create Invoice</button>
+      <p v-if="searchQuery">{{ langStore.t('noMatchingInvoices') }} "{{ searchQuery }}"</p>
+      <p v-else>{{ langStore.t('noInvoicesYet') }}</p>
+      <button class="btn btn-primary" @click="$router.push('/create')">{{ langStore.t('createInvoice') }}</button>
     </div>
   </div>
 </template>
@@ -91,7 +91,7 @@ const downloadInvoice = (invoice) => {
 };
 
 const confirmDelete = async (id) => {
-  if (confirm("Are you sure you want to delete this invoice?")) {
+  if (confirm(langStore.t('deleteConfirm'))) {
     await invoiceStore.deleteInvoice(id);
   }
 };
