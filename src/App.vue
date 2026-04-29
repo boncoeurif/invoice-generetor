@@ -34,12 +34,6 @@
             <span>{{ langStore.t('dashboard') }}</span>
           </router-link>
 
-          <router-link to="/create" class="nav-item create-nav-btn">
-            <div class="plus-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            </div>
-          </router-link>
-
           <router-link to="/help" class="nav-item">
             <div class="nav-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
@@ -54,6 +48,11 @@
             <span>{{ langStore.t('settings') }}</span>
           </router-link>
         </nav>
+
+        <!-- Premium Floating Action Button (Mobile Only) -->
+        <router-link v-if="isMobile" to="/create" class="mobile-fab">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </router-link>
       </div>
     </template>
 
@@ -181,6 +180,30 @@ html, body {
 @media (max-width: 768px) {
   .app-layout { display: block; }
   .content-area { display: block; }
-  .main-content { padding: 1rem; padding-bottom: calc(var(--nav-height) + 40px); }
+  .main-content { padding: 1rem; padding-bottom: calc(var(--nav-height) + 80px); }
+  
+  .mobile-fab {
+    position: fixed;
+    bottom: calc(var(--nav-height) + 20px);
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--primary-green);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    z-index: 1100;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .mobile-fab:active {
+    transform: scale(0.9) translateY(2px);
+    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+  }
 }
+
+.mobile-fab { display: none; }
 </style>
