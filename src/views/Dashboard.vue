@@ -53,7 +53,7 @@
               </div>
             </div>
             <div v-else class="empty-state">
-               <p>No invoices found.</p>
+               <p>{{ langStore.t('noInvoices') }}</p>
             </div>
           </section>
 
@@ -79,12 +79,6 @@
             </div>
           </section>
         </div>
-      </template>
-
-      <template v-else-if="recentInvoices.length === 0">
-         <div class="empty-state">
-            <p>{{ langStore.t('noInvoices') }}</p>
-         </div>
       </template>
 
     </main>
