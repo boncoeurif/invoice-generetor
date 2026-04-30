@@ -167,17 +167,17 @@ html, body {
   justify-content: center;
   text-decoration: none; 
   color: var(--text-secondary); 
-  font-size: 0.65rem; /* Smaller font */
+  font-size: 0.6rem; /* Slightly smaller for French/Kinyarwanda */
   gap: 2px;
   text-align: center;
   white-space: nowrap;
   min-width: 0;
-  padding: 5px 2px;
+  padding: 4px 1px;
 }
 
 .nav-icon svg {
-  width: 18px; /* Slightly smaller icons to save space */
-  height: 18px;
+  width: 16px; /* Optimized for narrow screens */
+  height: 16px;
 }
 
 .nav-item.router-link-active { color: var(--primary-green); }

@@ -131,7 +131,7 @@ const translations = {
     errorSaving: "Error saving invoice."
   },
   fr: {
-    dashboard: 'Tableau de bord',
+    dashboard: 'Tableau',
     createInvoice: 'Créer une facture',
     editInvoice: 'Modifier la facture',
     clientName: 'Nom du Client',

@@ -303,16 +303,20 @@ import { langStore } from '@/store/languageStore'
 .home-footer { padding: 60px 5%; text-align: center; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.03); }
 
 @media (max-width: 1024px) { 
-  .hero-section { flex-direction: column; text-align: center; padding-top: 40px; } 
-  .hero-content h1 { font-size: 3.5rem; }
-  .hero-content p { margin-left: auto; margin-right: auto; }
+  .hero-section { flex-direction: column; text-align: center; padding-top: 20px; padding-bottom: 120px; } 
+  .hero-content h1 { font-size: 2.8rem; line-height: 1.1; }
+  .hero-content p { font-size: 1.1rem; margin-bottom: 30px; margin-left: auto; margin-right: auto; }
   .cta-group { align-items: center; }
-  .hero-visual { width: 100%; max-width: 600px; }
+  .hero-visual { width: 100%; max-width: 500px; margin-top: 40px; }
   .floating-card { display: none; }
 }
 
 @media (max-width: 600px) {
-  .hero-content h1 { font-size: 2.75rem; }
+  .hero-content h1 { font-size: 2.2rem; }
+  .home-nav { padding: 20px 4%; }
   .home-nav .logo span { display: none; }
+  .nav-links { gap: 10px; }
+  .btn-cta-primary.small { padding: 8px 15px; font-size: 0.85rem; }
+  .btn-cta-outline { padding: 8px 15px; font-size: 0.85rem; }
 }
 </style>
