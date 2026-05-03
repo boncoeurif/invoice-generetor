@@ -296,29 +296,9 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
 
 .day-label { font-size: 0.7rem; color: var(--color-text-secondary); font-weight: 600; }
 
-.fab {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  border: none;
-  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
-  cursor: pointer;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: all 0.2s;
-}
-.fab:hover { transform: scale(1.1); filter: brightness(1.1); }
-
 @media (max-width: 768px) {
   .dashboard-content-area { padding: 16px; gap: 16px; }
   .summary-cards-section { grid-template-columns: 1fr; }
   .navbar { padding: 16px; }
-  .fab { display: flex; }
 }
 </style>

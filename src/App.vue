@@ -34,6 +34,13 @@
             <span>{{ langStore.t('dashboard') }}</span>
           </router-link>
 
+          <router-link to="/history" class="nav-item">
+            <div class="nav-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <span>{{ langStore.t('actions') }}</span>
+          </router-link>
+
           <router-link to="/help" class="nav-item">
             <div class="nav-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
@@ -80,9 +87,12 @@ const isMobile = ref(window.innerWidth <= 768)
 const updateBreakpoint = () => { isMobile.value = window.innerWidth <= 768 }
 
 // NAVIGATION VISIBILITY LOGIC
-// We hide sidebar/bottom-nav on Landing page (/) and Login page (/login)
+// We show navigation if user is logged in (even on Home page)
+// but hide it if they are on Login or if they are a guest on Home page.
 const showNavigation = computed(() => {
-  return route.path !== '/' && route.path !== '/login'
+  if (route.path === '/login') return false
+  if (authStore.user) return true
+  return route.path !== '/'
 })
 
 onMounted(() => {
