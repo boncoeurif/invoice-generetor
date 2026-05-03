@@ -28,7 +28,7 @@ const translations = {
     modeService: 'Service / Consulting',
     modeRestaurant: 'Restaurant / Cafe',
     modeHardware: 'Kenkayoli (Tools & Goods)',
-    help: 'Help & Feedback',
+    help: 'Help',
     recycleBin: 'Recycle Bin',
     dosage: 'Strength / Dosage',
     instructions: 'Instructions',
@@ -392,4 +392,3 @@ export const langStore = reactive({
     return translations[this.locale][key] || key
   }
 })
-)

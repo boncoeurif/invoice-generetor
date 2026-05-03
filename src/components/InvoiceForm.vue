@@ -201,23 +201,26 @@ const handleSubmit = async () => {
 }
 
 @media (max-width: 768px) {
+  .invoice-form-container { padding: 20px 12px; }
+  .item-card { padding: 20px 16px; border-radius: 20px; }
+
   .item-grid { 
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
   }
   .description, .qty, .unit, .price { grid-column: auto; }
   
   /* Force larger inputs on mobile */
   .input-wrapper input, .input-group input {
-    font-size: 1.15rem !important;
-    padding: 16px 18px !important;
-    height: 60px !important;
+    font-size: 1.25rem !important; /* Even larger font */
+    padding: 18px !important;
+    height: 65px !important;
     width: 100% !important;
   }
   
   .input-wrapper .input-icon {
-    left: 18px;
+    left: 16px;
   }
   
   .input-wrapper input {
@@ -225,7 +228,7 @@ const handleSubmit = async () => {
   }
 
   .field-label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
