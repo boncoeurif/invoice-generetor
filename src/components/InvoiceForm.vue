@@ -201,8 +201,8 @@ const handleSubmit = async () => {
 }
 
 @media (max-width: 768px) {
-  .invoice-form-container { padding: 20px 12px; }
-  .item-card { padding: 20px 16px; border-radius: 20px; }
+  .invoice-form-container { padding: 15px 6px; width: 100%; }
+  .item-card { padding: 16px 12px; border-radius: 16px; margin-bottom: 5px; }
 
   .item-grid { 
     display: flex;
