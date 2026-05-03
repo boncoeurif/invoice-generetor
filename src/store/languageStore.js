@@ -152,7 +152,7 @@ const translations = {
     modeService: 'Service / Conseil',
     modeRestaurant: 'Restaurant / Café',
     modeHardware: 'Kenkayoli (Outils & Biens)',
-    help: 'Aide & Feedback',
+    help: 'Aide',
     recycleBin: 'Corbeille',
     dosage: 'Dosage / Force',
     instructions: 'Instructions',

@@ -203,6 +203,21 @@ const handleSubmit = async () => {
 @media (max-width: 768px) {
   .item-grid { grid-template-columns: 1fr 1fr; }
   .description { grid-column: span 2; }
+  
+  /* Force larger inputs on mobile */
+  .input-wrapper input, .input-group input {
+    font-size: 1.25rem !important; /* Larger text */
+    padding: 20px !important;    /* More padding */
+    height: 65px !important;     /* Explicit height for touch targets */
+  }
+  
+  .input-wrapper .input-icon {
+    left: 20px;
+  }
+  
+  .input-wrapper input {
+    padding-left: 60px !important;
+  }
 }
 
 .input-group { display: flex; flex-direction: column; gap: 10px; }

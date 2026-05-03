@@ -160,8 +160,18 @@ html, body {
 }
 
 .nav-item {
-  flex: 1; display: flex; flex-direction: column; align-items: center;
-  text-decoration: none; color: var(--text-secondary); font-size: 0.62rem; gap: 4px;
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; 
+  color: var(--text-secondary); 
+  font-size: 0.7rem; 
+  gap: 2px;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .nav-item.router-link-active { color: var(--primary-green); }
