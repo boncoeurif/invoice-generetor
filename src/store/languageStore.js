@@ -272,7 +272,7 @@ const translations = {
     modeService: 'Serivisi / Inama',
     modeRestaurant: 'Restora / Kafe',
     modeHardware: 'Kenkayoli (Ibikoresho)',
-    help: 'Ubufasha & Ibitekerezo',
+    help: 'Ubufasha',
     recycleBin: 'Ibasitene',
     dosage: 'Imiterekere / Imyandikire',
     instructions: 'Uko bikoreshwa',
@@ -392,3 +392,4 @@ export const langStore = reactive({
     return translations[this.locale][key] || key
   }
 })
+)

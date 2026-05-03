@@ -167,11 +167,17 @@ html, body {
   justify-content: center;
   text-decoration: none; 
   color: var(--text-secondary); 
-  font-size: 0.7rem; 
+  font-size: 0.65rem; /* Smaller font */
   gap: 2px;
   text-align: center;
   white-space: nowrap;
   min-width: 0;
+  padding: 5px 2px;
+}
+
+.nav-icon svg {
+  width: 18px; /* Slightly smaller icons to save space */
+  height: 18px;
 }
 
 .nav-item.router-link-active { color: var(--primary-green); }

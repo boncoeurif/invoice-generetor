@@ -201,22 +201,31 @@ const handleSubmit = async () => {
 }
 
 @media (max-width: 768px) {
-  .item-grid { grid-template-columns: 1fr 1fr; }
-  .description { grid-column: span 2; }
+  .item-grid { 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .description, .qty, .unit, .price { grid-column: auto; }
   
   /* Force larger inputs on mobile */
   .input-wrapper input, .input-group input {
-    font-size: 1.25rem !important; /* Larger text */
-    padding: 20px !important;    /* More padding */
-    height: 65px !important;     /* Explicit height for touch targets */
+    font-size: 1.15rem !important;
+    padding: 16px 18px !important;
+    height: 60px !important;
+    width: 100% !important;
   }
   
   .input-wrapper .input-icon {
-    left: 20px;
+    left: 18px;
   }
   
   .input-wrapper input {
-    padding-left: 60px !important;
+    padding-left: 54px !important;
+  }
+
+  .field-label {
+    font-size: 0.8rem;
   }
 }
 
