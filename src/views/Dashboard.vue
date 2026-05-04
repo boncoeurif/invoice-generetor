@@ -60,19 +60,30 @@
           <section class="analytics-section rounded-card">
             <div class="section-header">
               <h2>{{ langStore.t('analytics') }}</h2>
+              <div v-if="revenueGrowth !== 0" :class="['growth-badge', revenueGrowth > 0 ? 'up' : 'down']">
+                <svg v-if="revenueGrowth > 0" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                <svg v-else xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+                {{ Math.abs(revenueGrowth) }}%
+              </div>
             </div>
             <div class="chart-container">
               <div class="chart-y-axis">
-                <span>100%</span>
-                <span>50%</span>
-                <span>0%</span>
+                <span>MAX</span>
+                <span>MID</span>
+                <span>0</span>
               </div>
               <div class="chart-wrapper">
                 <div v-for="(day, index) in chartData" :key="index" class="bar-container">
-                  <div class="bar-hint" :style="{ height: day.height }">
+                  <div class="bar-hint" :style="{ bottom: `calc(${day.height} + 10px)` }">
                     <span class="hint-value">{{ day.value }}</span>
                   </div>
-                  <div class="bar" :style="{ height: day.height, backgroundColor: day.color }"></div>
+                  <div 
+                    class="bar" 
+                    :style="{ 
+                      height: day.height, 
+                      background: day.active ? 'linear-gradient(180deg, var(--color-primary) 0%, #10b981 100%)' : 'rgba(255,255,255,0.05)' 
+                    }"
+                  ></div>
                   <span class="day-label">{{ day.label }}</span>
                 </div>
               </div>
@@ -117,17 +128,57 @@ const summaryData = computed(() => [
 ]);
 
 const recentInvoices = computed(() => [...invoiceStore.invoices].sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0)).slice(0, 5));
+
 const chartData = computed(() => {
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const days = [];
+  const now = new Date();
+  
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(now.getDate() - i);
+    days.push({
+      dateStr: d.toLocaleDateString('en-GB'),
+      label: d.toLocaleDateString('en-US', { weekday: 'short' }),
+      total: 0
+    });
+  }
+
+  invoiceStore.invoices.forEach(inv => {
+    const day = days.find(d => d.dateStr === inv.date);
+    if (day) day.total += Number(inv.total || 0);
+  });
+
+  const maxTotal = Math.max(...days.map(d => d.total), 1);
+
   return days.map(day => {
-    const val = Math.floor(Math.random() * 100);
+    const percentage = (day.total / maxTotal) * 100;
     return { 
-      label: day, 
-      height: `${val}%`, 
-      value: val,
-      color: val > 70 ? '#22C55E' : val > 40 ? '#3B82F6' : '#64748B' 
+      label: day.label, 
+      height: `${Math.max(percentage, 8)}%`, 
+      value: `${langStore.currency}${day.total.toLocaleString()}`,
+      active: day.total > 0
     }
   });
+});
+
+const revenueGrowth = computed(() => {
+  const now = new Date();
+  const last7DaysTotal = invoiceStore.invoices
+    .filter(inv => {
+      const diff = (now - new Date(inv.createdAt)) / (1000 * 60 * 60 * 24);
+      return diff <= 7;
+    })
+    .reduce((sum, inv) => sum + Number(inv.total || 0), 0);
+
+  const prev7DaysTotal = invoiceStore.invoices
+    .filter(inv => {
+      const diff = (now - new Date(inv.createdAt)) / (1000 * 60 * 60 * 24);
+      return diff > 7 && diff <= 14;
+    })
+    .reduce((sum, inv) => sum + Number(inv.total || 0), 0);
+
+  if (prev7DaysTotal === 0) return last7DaysTotal > 0 ? 100 : 0;
+  return Math.round(((last7DaysTotal - prev7DaysTotal) / prev7DaysTotal) * 100);
 });
 
 const goToCreateInvoice = () => router.push('/create');
@@ -225,6 +276,18 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
 .action-btn.delete:hover { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); color: #ef4444; }
 
 /* Analytics Styles */
+.growth-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.growth-badge.up { background: rgba(34, 197, 94, 0.1); color: var(--color-primary); }
+.growth-badge.down { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
 .analytics-section { display: flex; flex-direction: column; }
 .chart-container { 
   flex: 1; 
@@ -238,9 +301,10 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   display: flex; 
   flex-direction: column; 
   justify-content: space-between; 
-  font-size: 0.65rem; 
+  font-size: 0.6rem; 
   color: var(--color-text-secondary);
   padding-bottom: 25px;
+  font-weight: 700;
 }
 
 .chart-wrapper { 
@@ -267,34 +331,43 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   min-height: 4px; 
   border-radius: 6px 6px 2px 2px; 
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.bar-container:hover .bar {
+  filter: brightness(1.2);
+  transform: scaleX(1.1);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
 }
 
 .bar-hint {
   position: absolute;
-  top: 0;
-  width: 100%;
+  width: auto;
+  white-space: nowrap;
   display: flex;
   justify-content: center;
   opacity: 0;
   transform: translateY(10px);
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 10;
 }
 
 .bar-container:hover .bar-hint {
   opacity: 1;
-  transform: translateY(-5px);
+  transform: translateY(0);
 }
 
 .hint-value {
   background: #fff;
   color: #000;
-  font-size: 0.6rem;
-  font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.day-label { font-size: 0.7rem; color: var(--color-text-secondary); font-weight: 600; }
+.day-label { font-size: 0.7rem; color: var(--color-text-secondary); font-weight: 700; text-transform: uppercase; }
 
 @media (max-width: 768px) {
   .dashboard-content-area { padding: 16px; gap: 16px; }
