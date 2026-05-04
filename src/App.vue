@@ -167,27 +167,42 @@ html, body {
   justify-content: center;
   text-decoration: none; 
   color: var(--text-secondary); 
-  font-size: 0.6rem; /* Slightly smaller for French/Kinyarwanda */
-  gap: 2px;
+  font-size: 0.65rem; 
+  gap: 4px;
   text-align: center;
   white-space: nowrap;
   min-width: 0;
-  padding: 4px 1px;
+  padding: 8px 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-icon svg {
-  width: 16px; /* Optimized for narrow screens */
-  height: 16px;
+.nav-item.router-link-active { 
+  color: var(--primary-green);
 }
-
-.nav-item.router-link-active { color: var(--primary-green); }
 
 .nav-icon {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-item.router-link-active .nav-icon {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--primary-green);
+}
+
+.nav-icon svg {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-item.router-link-active svg {
+  transform: scale(1.1);
 }
 
 .create-nav-btn { position: relative; top: -15px; flex: 0 0 60px; }

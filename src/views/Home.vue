@@ -209,8 +209,16 @@ import { langStore } from '@/store/languageStore'
   100% { transform: scale(3); opacity: 0; }
 }
 
-.hero-content h1 { font-size: 4.5rem; font-weight: 900; margin-bottom: 24px; line-height: 1.1; letter-spacing: -0.03em; }
-.hero-content p { font-size: 1.35rem; color: var(--text-secondary); margin-bottom: 48px; line-height: 1.6; max-width: 600px; }
+.hero-content h1 { 
+  font-size: clamp(2.2rem, 8vw, 4.5rem); 
+  font-weight: 900; 
+  margin-bottom: 24px; 
+  line-height: 1.1; 
+  letter-spacing: -0.03em; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+.hero-content p { font-size: clamp(1rem, 3vw, 1.35rem); color: var(--text-secondary); margin-bottom: 48px; line-height: 1.6; max-width: 600px; }
 
 .cta-group { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
 
@@ -304,7 +312,6 @@ import { langStore } from '@/store/languageStore'
 
 @media (max-width: 1024px) { 
   .hero-section { flex-direction: column; text-align: center; padding-top: 20px; padding-bottom: 120px; } 
-  .hero-content h1 { font-size: 2.8rem; line-height: 1.1; }
   .hero-content p { font-size: 1.1rem; margin-bottom: 30px; margin-left: auto; margin-right: auto; }
   .cta-group { align-items: center; }
   .hero-visual { width: 100%; max-width: 500px; margin-top: 40px; }
@@ -312,7 +319,6 @@ import { langStore } from '@/store/languageStore'
 }
 
 @media (max-width: 600px) {
-  .hero-content h1 { font-size: 2.2rem; }
   .home-nav { padding: 20px 4%; }
   .home-nav .logo span { display: none; }
   .nav-links { gap: 10px; }
