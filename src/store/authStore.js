@@ -1,12 +1,13 @@
 import { reactive } from 'vue'
 import { auth, googleProvider } from '@/utils/firebase'
 import { signInWithPopup, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from 'firebase/auth'
-import router from '@/router'
 
 export const authStore = reactive({
   user: null,
   isInitialized: false,
   initPromise: null,
+  onLogin: null,
+  onLogout: null,
 
   async loginWithGoogle() {
     try {
@@ -16,7 +17,7 @@ export const authStore = reactive({
       const result = await signInWithPopup(auth, googleProvider)
       this.user = result.user
       console.log("Login successful:", this.user.displayName)
-      router.push('/dashboard')
+      if (this.onLogin) this.onLogin()
     } catch (error) {
       console.error("Login failed detailed error:", error)
       
@@ -36,7 +37,7 @@ export const authStore = reactive({
     try {
       await signOut(auth)
       this.user = null
-      router.push('/login')
+      if (this.onLogout) this.onLogout()
     } catch (error) {
       console.error("Logout failed:", error)
     }
