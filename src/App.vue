@@ -90,9 +90,8 @@ const updateBreakpoint = () => { isMobile.value = window.innerWidth <= 768 }
 // We show navigation if user is logged in (even on Home page)
 // but hide it if they are on Login or if they are a guest on Home page.
 const showNavigation = computed(() => {
-  if (route.path === '/login') return false
-  if (authStore.user) return true
-  return route.path !== '/'
+  if (route.path === '/login' || route.path === '/') return false
+  return !!authStore.user
 })
 
 onMounted(() => {
