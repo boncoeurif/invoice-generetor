@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /history
+Disallow: /reports
+Disallow: /create
+Disallow: /edit/
+Disallow: /recycle-bin
+Disallow: /settings
+
+Sitemap: https://invoxa-rw.vercel.app/sitemap.xml
