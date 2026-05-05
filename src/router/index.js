@@ -28,8 +28,13 @@ const router = createRouter({
   routes,
 })
 
-// Auth Guard
+// SEO & Auth Guard
 router.beforeEach(async (to, from, next) => {
+  // Update Title for SEO
+  const baseTitle = 'Invoxa'
+  const pageTitle = to.name ? `${to.name} | ${baseTitle}` : baseTitle
+  document.title = pageTitle
+
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   
   // Wait for Firebase to initialize if it hasn't yet
