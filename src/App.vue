@@ -104,6 +104,7 @@ onMounted(() => {
 onUnmounted(() => { window.removeEventListener('resize', updateBreakpoint) })
 </script>
 
+<style>
 /* CSS for the Minimalist Pro light theme */
 :root {
   --primary-green: #22C55E;
