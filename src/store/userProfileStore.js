@@ -37,6 +37,9 @@ export const profileStore = reactive({
         this.profile.businessName = authStore.user.displayName || ''
       }
       this.isLoading = false
+    }, (error) => {
+      console.error("Firestore [profiles] Listener Error:", error.message)
+      this.isLoading = false
     })
   },
 

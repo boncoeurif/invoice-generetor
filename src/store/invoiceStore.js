@@ -39,6 +39,9 @@ export const invoiceStore = reactive({
       this.deletedInvoices = allData.filter(inv => inv.isDeleted)
       this.isLoading = false
       this.isInitialized = true
+    }, (error) => {
+      console.error("Firestore [invoices] Listener Error:", error.message)
+      this.isLoading = false
     })
   },
 
