@@ -107,8 +107,8 @@ import { langStore } from '@/store/languageStore'
 <style scoped>
 .home-container { 
   min-height: 100vh; 
-  background-color: var(--bg-dark); 
-  color: #fff; 
+  background-color: var(--bg-light); 
+  color: var(--text-primary); 
   font-family: 'Inter', sans-serif; 
   overflow-x: hidden; 
   position: relative;
@@ -120,12 +120,12 @@ import { langStore } from '@/store/languageStore'
   right: -100px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.08) 0%, rgba(34, 197, 94, 0) 70%);
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0) 70%);
   z-index: 0;
   pointer-events: none;
 }
 
-.text-gradient { background: linear-gradient(90deg, var(--primary-green), #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.text-gradient { background: linear-gradient(90deg, var(--primary-green), #16a34a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
 .home-nav { 
   display: flex; 
@@ -137,7 +137,7 @@ import { langStore } from '@/store/languageStore'
   position: relative;
   z-index: 10;
 }
-.logo { display: flex; align-items: center; gap: 12px; font-size: 1.75rem; font-weight: 900; letter-spacing: -0.02em; }
+.logo { display: flex; align-items: center; gap: 12px; font-size: 1.75rem; font-weight: 900; letter-spacing: -0.02em; color: var(--text-primary); }
 .logo img { height: 40px; }
 
 .nav-links { display: flex; gap: 20px; align-items: center; }
@@ -153,21 +153,21 @@ import { langStore } from '@/store/languageStore'
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
 }
-.btn-cta-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4); filter: brightness(1.1); }
+.btn-cta-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(34, 197, 94, 0.3); filter: brightness(1.05); }
 .btn-cta-primary.small { padding: 10px 20px; font-size: 0.9rem; }
 
 .btn-cta-outline {
-  color: #fff;
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-color);
   transition: all 0.2s;
 }
-.btn-cta-outline:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+.btn-cta-outline:hover { background: #f8fafc; border-color: var(--text-primary); }
 
 .hero-section { display: flex; align-items: center; padding: 60px 5% 100px; max-width: 1400px; margin: 0 auto; gap: 80px; position: relative; z-index: 1; }
 .hero-content { flex: 1.2; }
@@ -177,14 +177,14 @@ import { langStore } from '@/store/languageStore'
   align-items: center; 
   gap: 10px;
   padding: 8px 16px; 
-  background: rgba(34, 197, 94, 0.1); 
+  background: #f0fdf4; 
   color: var(--primary-green); 
   border-radius: 30px; 
   font-size: 0.75rem; 
   font-weight: 800; 
   letter-spacing: 0.1em; 
   margin-bottom: 32px; 
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  border: 1px solid #dcfce7;
 }
 
 .pulse-dot {
@@ -215,28 +215,27 @@ import { langStore } from '@/store/languageStore'
   margin-bottom: 24px; 
   line-height: 1.1; 
   letter-spacing: -0.03em; 
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  color: var(--text-primary);
 }
-.hero-content p { font-size: clamp(1rem, 3vw, 1.35rem); color: var(--text-secondary); margin-bottom: 48px; line-height: 1.6; max-width: 600px; }
+.hero-content p { font-size: clamp(1rem, 3vw, 1.35rem); color: var(--text-secondary); margin-bottom: 48px; line-height: 1.6; max-width: 600px; font-weight: 500; }
 
 .cta-group { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
 
 .trust-badge { display: flex; align-items: center; gap: 16px; }
 .avatars { display: flex; }
-.avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--bg-dark); margin-left: -12px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; margin-left: -12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 .avatar:first-child { margin-left: 0; }
-.trust-badge span { font-size: 0.9rem; color: var(--text-secondary); font-weight: 600; }
+.trust-badge span { font-size: 0.9rem; color: var(--text-secondary); font-weight: 700; }
 
 .hero-visual { flex: 1; position: relative; }
 .visual-wrapper { position: relative; }
 
 .preview-card { 
-  background: var(--surface-dark); 
+  background: #fff; 
   padding: 12px; 
   border-radius: 24px; 
-  box-shadow: 0 50px 100px rgba(0,0,0,0.6); 
-  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1); 
+  border: 1px solid var(--border-color);
   position: relative;
   z-index: 2;
 }
@@ -250,16 +249,16 @@ import { langStore } from '@/store/languageStore'
 
 .floating-card {
   position: absolute;
-  background: rgba(17, 24, 39, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   padding: 16px 24px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   gap: 12px;
   z-index: 3;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
   animation: float 6s ease-in-out infinite;
 }
 
@@ -272,31 +271,32 @@ import { langStore } from '@/store/languageStore'
 .floating-card.c2 { bottom: 40px; left: -40px; animation-delay: -3s; }
 .floating-card svg.green { color: var(--primary-green); }
 .floating-card svg.blue { color: #3b82f6; }
-.floating-card span { font-weight: 800; font-size: 0.9rem; }
+.floating-card span { font-weight: 800; font-size: 0.95rem; color: var(--text-primary); }
 
-.features-section { padding: 120px 5%; background: rgba(255,255,255,0.01); border-top: 1px solid rgba(255,255,255,0.03); }
+.features-section { padding: 120px 5%; background: #fff; border-top: 1px solid var(--border-color); }
 .section-title { text-align: center; margin-bottom: 80px; }
-.section-title h2 { font-size: 3rem; font-weight: 900; margin-bottom: 16px; }
-.section-title p { color: var(--text-secondary); font-size: 1.2rem; }
+.section-title h2 { font-size: 3rem; font-weight: 900; margin-bottom: 16px; color: var(--text-primary); }
+.section-title p { color: var(--text-secondary); font-size: 1.2rem; font-weight: 600; }
 
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
 .feature-card { 
-  background: rgba(255,255,255,0.02); 
+  background: #f8fafc; 
   padding: 48px; 
   border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.05); 
+  border: 1px solid var(--border-color); 
   transition: all 0.3s;
 }
 .feature-card:hover { 
-  background: rgba(255,255,255,0.04); 
+  background: #fff; 
   transform: translateY(-10px); 
-  border-color: rgba(34, 197, 94, 0.2); 
+  border-color: var(--primary-green); 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
 .f-icon { 
   width: 50px; 
   height: 50px; 
-  background: rgba(34, 197, 94, 0.1); 
+  background: #f0fdf4; 
   color: var(--primary-green); 
   border-radius: 14px; 
   display: flex; 
@@ -305,10 +305,10 @@ import { langStore } from '@/store/languageStore'
   margin-bottom: 24px;
 }
 
-.feature-card h3 { font-size: 1.5rem; margin-bottom: 16px; font-weight: 800; }
-.feature-card p { color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem; }
+.feature-card h3 { font-size: 1.5rem; margin-bottom: 16px; font-weight: 800; color: var(--text-primary); }
+.feature-card p { color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem; font-weight: 500; }
 
-.home-footer { padding: 60px 5%; text-align: center; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.03); }
+.home-footer { padding: 60px 5%; text-align: center; color: var(--text-secondary); font-size: 0.95rem; border-top: 1px solid var(--border-color); font-weight: 600; }
 
 @media (max-width: 1024px) { 
   .hero-section { flex-direction: column; text-align: center; padding-top: 20px; padding-bottom: 120px; } 

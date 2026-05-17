@@ -68,8 +68,8 @@ const permanentlyDelete = async (id) => {
 <style scoped>
 .recycle-bin-view { padding: 1.5rem; max-width: 1200px; margin: 0 auto; padding-bottom: 100px; }
 .page-header { margin-bottom: 2.5rem; }
-.page-header h1 { font-size: 2.25rem; color: #fff; font-weight: 900; }
-.page-header p { color: var(--color-text-secondary); }
+.page-header h1 { font-size: 2.25rem; color: var(--text-primary); font-weight: 900; }
+.page-header p { color: var(--text-secondary); font-weight: 600; }
 
 .invoice-grid { 
   display: grid; 
@@ -82,38 +82,39 @@ const permanentlyDelete = async (id) => {
 }
 
 .invoice-card { 
-  background: var(--color-surface); 
+  background: var(--surface-white); 
   padding: 24px; 
-  border: 1px solid rgba(255,255,255,0.05); 
+  border: 1px solid var(--border-color); 
   display: flex; 
   flex-direction: column; 
   gap: 24px; 
   border-radius: 24px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.invoice-card:hover { transform: translateY(-5px); border-color: rgba(239, 68, 68, 0.2); }
+.invoice-card:hover { transform: translateY(-5px); border-color: #ef4444; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.05); }
 
-.client-info h3 { margin: 8px 0; font-size: 1.25rem; color: #fff; font-weight: 800; }
-.invoice-id { font-size: 0.7rem; font-weight: 900; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.1em; }
-.date { font-size: 0.8rem; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.client-info h3 { margin: 8px 0; font-size: 1.25rem; color: var(--text-primary); font-weight: 800; }
+.invoice-id { font-size: 0.7rem; font-weight: 900; color: var(--primary-green); text-transform: uppercase; letter-spacing: 0.1em; }
+.date { font-size: 0.8rem; display: flex; align-items: center; gap: 6px; font-weight: 700; }
 .deleted-date { color: #ef4444; }
 
-.card-details { padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.card-details { padding: 20px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
 .detail-item { display: flex; justify-content: space-between; }
-.detail-item .label { color: var(--color-text-secondary); font-size: 0.85rem; }
-.detail-item .value { color: #fff; font-weight: 800; }
+.detail-item .label { color: var(--text-secondary); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+.detail-item .value { color: var(--text-primary); font-weight: 800; font-size: 1.1rem; }
 
 .card-actions { display: flex; gap: 10px; }
 
 .btn-action-restore {
   flex: 1;
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.2);
-  color: var(--color-primary);
+  background: #f0fdf4;
+  border: 1px solid #dcfce7;
+  color: #166534;
   padding: 12px;
   border-radius: 12px;
-  font-weight: 700;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,12 +122,12 @@ const permanentlyDelete = async (id) => {
   cursor: pointer;
   transition: all 0.2s;
 }
-.btn-action-restore:hover { background: rgba(34, 197, 94, 0.2); }
+.btn-action-restore:hover { background: #dcfce7; transform: translateY(-1px); }
 
 .btn-action-delete {
-  background: rgba(239, 68, 68, 0.08);
+  background: #fff;
   color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1.5px solid #fee2e2;
   width: 48px;
   height: 48px;
   display: flex;
@@ -137,8 +138,8 @@ const permanentlyDelete = async (id) => {
   transition: all 0.2s;
   flex-shrink: 0;
 }
-.btn-action-delete:hover { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
+.btn-action-delete:hover { background: #fef2f2; border-color: #ef4444; }
 
-.empty-state { text-align: center; padding: 100px 20px; color: var(--color-text-secondary); }
-.empty-icon { color: rgba(255,255,255,0.1); margin-bottom: 20px; }
+.empty-state { text-align: center; padding: 100px 20px; color: var(--text-secondary); }
+.empty-icon { color: var(--border-color); margin-bottom: 20px; }
 </style>

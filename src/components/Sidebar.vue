@@ -82,19 +82,19 @@ import { langStore } from '@/store/languageStore'
 <style scoped>
 .sidebar {
   width: 260px;
-  background-color: var(--color-surface);
+  background-color: var(--surface-white);
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  box-shadow: 4px 0 24px rgba(0,0,0,0.2);
-  border-right: 1px solid rgba(255,255,255,0.05);
+  border-right: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
 }
 
 .sidebar-header {
   padding: 0 12px 32px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .sidebar-logo {
@@ -109,19 +109,19 @@ import { langStore } from '@/store/languageStore'
 }
 
 .sidebar-nav li {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   text-decoration: none;
   font-weight: 600;
   padding: 12px 16px;
   border-radius: 12px;
   transition: all 0.2s ease;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   gap: 12px;
 }
 
@@ -129,21 +129,23 @@ import { langStore } from '@/store/languageStore'
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--color-text-primary);
+  background-color: #f1f5f9;
+  color: var(--text-primary);
 }
 
 .nav-link.router-link-active {
-  background-color: rgba(34, 197, 94, 0.1);
-  color: var(--color-primary);
+  background-color: rgba(34, 197, 94, 0.08);
+  color: var(--primary-green);
 }
 
 .nav-link.router-link-active .icon {
-  color: var(--color-primary);
+  opacity: 1;
+  color: var(--primary-green);
 }
 </style>

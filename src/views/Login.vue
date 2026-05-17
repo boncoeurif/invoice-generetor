@@ -33,7 +33,7 @@ import { langStore } from '@/store/languageStore'
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-background);
+  background-color: var(--bg-light);
   padding: 2rem;
   position: absolute;
   top: 0;
@@ -43,9 +43,9 @@ import { langStore } from '@/store/languageStore'
 
 .bg-glow {
   position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0) 70%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0) 70%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -53,14 +53,14 @@ import { langStore } from '@/store/languageStore'
 }
 
 .login-card {
-  background: var(--color-surface);
+  background: var(--surface-white);
   padding: 4rem 3rem;
   border-radius: 32px;
   width: 100%;
   max-width: 440px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
   position: relative;
   z-index: 1;
 }
@@ -70,7 +70,7 @@ import { langStore } from '@/store/languageStore'
 }
 
 .logo-wrapper {
-  background: rgba(255,255,255,0.03);
+  background: #f8fafc;
   width: 100px;
   height: 100px;
   border-radius: 24px;
@@ -78,7 +78,7 @@ import { langStore } from '@/store/languageStore'
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
 }
 
 .login-logo {
@@ -87,24 +87,24 @@ import { langStore } from '@/store/languageStore'
 
 .login-card h1 {
   font-size: 2.5rem;
-  color: #fff;
+  color: var(--text-primary);
   margin: 0;
   font-weight: 900;
   letter-spacing: -0.02em;
 }
 
 .login-card p {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   margin-top: 0.75rem;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .btn-google {
   width: 100%;
   background: #fff;
-  color: #000;
-  border: none;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
   padding: 16px;
   border-radius: 16px;
   font-weight: 800;
@@ -115,20 +115,21 @@ import { langStore } from '@/store/languageStore'
   cursor: pointer;
   font-size: 1.05rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .btn-google:hover {
-  transform: translateY(-3px);
-  background: #f8f8f8;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  background: #f8fafc;
+  border-color: var(--text-primary);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
 .terms {
   font-size: 0.8rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   margin-top: 2.5rem;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 @media (max-width: 480px) {

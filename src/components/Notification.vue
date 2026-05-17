@@ -36,14 +36,14 @@ import { notificationStore } from '@/store/notificationStore'
 
 .toast {
   pointer-events: auto;
-  min-width: 300px;
+  min-width: 320px;
   max-width: 450px;
   padding: 16px 20px;
-  border-radius: 16px;
-  background: rgba(17, 24, 39, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -53,33 +53,34 @@ import { notificationStore } from '@/store/notificationStore'
 
 .toast:hover {
   transform: translateY(-2px);
-  filter: brightness(1.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .toast-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
-.toast.success .toast-icon { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
-.toast.error .toast-icon { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
-.toast.warning .toast-icon { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
-.toast.info .toast-icon { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.toast.success .toast-icon { background: #f0fdf4; color: #166534; border: 1px solid #dcfce7; }
+.toast.error .toast-icon { background: #fef2f2; color: #991b1b; border: 1px solid #fee2e2; }
+.toast.warning .toast-icon { background: #fffbeb; color: #92400e; border: 1px solid #fef3c7; }
+.toast.info .toast-icon { background: #eff6ff; color: #1e40af; border: 1px solid #dbeafe; }
 
 .toast-message {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Animations */
 .toast-list-enter-from {
   opacity: 0;
-  transform: translateX(50px) scale(0.9);
+  transform: translateX(50px) scale(0.95);
 }
 .toast-list-enter-active, .toast-list-leave-active {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);

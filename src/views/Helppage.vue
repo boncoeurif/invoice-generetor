@@ -70,6 +70,7 @@
 import { ref } from 'vue'
 import emailjs from 'emailjs-com'
 import { langStore } from '@/store/languageStore'
+import { notificationStore } from '@/store/notificationStore'
 
 emailjs.init('4pEz8Ivxy7ikNqL9B')
 
@@ -86,12 +87,12 @@ const submitFeedback = () => {
 
   emailjs.send('service_3wei1up', 'template_k6say24', templateParams)
     .then(() => {
-       alert(langStore.t('feedbackSuccess'))
+       notificationStore.success(langStore.t('feedbackSuccess') || 'Feedback sent successfully!')
        from_name.value = ''
        from_email.value = ''
        message.value = ''
     }, () => {
-       alert(langStore.t('feedbackFailed'))
+       notificationStore.error(langStore.t('feedbackFailed') || 'Failed to send feedback.')
     })
 }
 </script>
@@ -109,17 +110,17 @@ const submitFeedback = () => {
 
 .page-header h1 {
   font-size: 2.25rem;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 900;
   margin: 0;
 }
 
 .help-card {
-  background: var(--color-surface);
+  background: var(--surface-white);
   border-radius: 24px;
   padding: 32px;
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .card-header {
@@ -131,14 +132,13 @@ const submitFeedback = () => {
 
 .card-header h2 {
   font-size: 1.25rem;
-  color: #fff;
+  color: var(--text-primary);
   margin: 0;
   font-weight: 800;
 }
 
 .header-icon {
   color: var(--primary-green);
-  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.3));
 }
 
 .intro-text {
@@ -146,6 +146,7 @@ const submitFeedback = () => {
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 24px;
+  font-weight: 500;
 }
 
 .steps-list {
@@ -157,16 +158,17 @@ const submitFeedback = () => {
 .step-item {
   display: flex;
   gap: 20px;
-  background: rgba(255,255,255,0.02);
+  background: #f8fafc;
   padding: 24px;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.03);
-  transition: transform 0.3s;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
 }
 
 .step-item:hover {
-  transform: translateX(10px);
-  background: rgba(255,255,255,0.04);
+  transform: translateX(8px);
+  border-color: var(--primary-green);
+  background: #fff;
 }
 
 .step-number {
@@ -181,7 +183,7 @@ const submitFeedback = () => {
   font-weight: 900;
   font-size: 0.9rem;
   flex-shrink: 0;
-  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
 }
 
 .step-content {
@@ -192,13 +194,14 @@ const submitFeedback = () => {
 
 .step-content strong {
   font-size: 1.1rem;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .step-content span {
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.5;
+  font-weight: 500;
 }
 
 /* Form Styles */
@@ -223,9 +226,9 @@ const submitFeedback = () => {
 }
 
 .form-group input, .form-group textarea {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #fff;
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-primary);
   padding: 16px;
   border-radius: 14px;
   font-size: 1rem;
@@ -234,9 +237,9 @@ const submitFeedback = () => {
 
 .form-group input:focus, .form-group textarea:focus {
   border-color: var(--primary-green);
-  background: rgba(255,255,255,0.04);
+  background: #fff;
   outline: none;
-  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.08);
 }
 
 .btn-submit {
@@ -250,13 +253,13 @@ const submitFeedback = () => {
   margin-top: 10px;
   font-size: 1.1rem;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.2);
 }
 
 .btn-submit:hover {
   transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
 }
 
 @media (max-width: 768px) {

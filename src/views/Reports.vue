@@ -74,81 +74,88 @@ const grandTotal = computed(() => {
 <style scoped>
 .reports-view { padding: 1.5rem; max-width: 1000px; margin: 0 auto; padding-bottom: 100px; }
 .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 20px; }
-.page-header h1 { font-size: 2.25rem; color: #fff; font-weight: 900; margin: 0; }
+.page-header h1 { font-size: 2.25rem; color: var(--text-primary); font-weight: 900; margin: 0; }
 
 .date-selector input { 
-  background: var(--color-surface); 
-  color: #fff; 
-  border: 1px solid rgba(255,255,255,0.1); 
+  background: var(--surface-white); 
+  color: var(--text-primary); 
+  border: 1.5px solid var(--border-color); 
   padding: 12px 16px; 
   border-radius: 12px; 
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 800;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
-.date-selector input:focus { border-color: var(--color-primary); }
+.date-selector input:focus { border-color: var(--primary-green); box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1); }
 
 .report-summary { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-  padding: 30px; 
-  gap: 30px; 
-  margin-bottom: 30px; 
-  background: var(--color-surface);
-  border: 1px solid rgba(255,255,255,0.05);
+  padding: 32px; 
+  gap: 32px; 
+  margin-bottom: 32px; 
+  background: var(--surface-white);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .summary-item { display: flex; align-items: center; gap: 20px; }
 .item-icon { 
   width: 56px; 
   height: 56px; 
-  background: rgba(34, 197, 94, 0.1); 
-  color: var(--color-primary); 
+  background: #f0fdf4; 
+  color: var(--primary-green); 
   display: flex; 
   align-items: center; 
   justify-content: center; 
   border-radius: 16px;
   flex-shrink: 0;
+  border: 1px solid #dcfce7;
 }
-.item-icon.earnings { background: rgba(37, 99, 235, 0.1); color: #3b82f6; }
+.item-icon.earnings { background: #eff6ff; color: #2563eb; border-color: #dbeafe; }
 
 .item-text { display: flex; flex-direction: column; gap: 4px; }
-.item-text .label { color: var(--color-text-secondary); font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em; }
-.item-text .value { font-size: 1.75rem; font-weight: 900; color: #fff; line-height: 1.2; }
+.item-text .label { color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; font-weight: 800; letter-spacing: 0.05em; }
+.item-text .value { font-size: 1.75rem; font-weight: 900; color: var(--text-primary); line-height: 1.2; }
 
 .report-table { 
   padding: 0; 
   overflow: hidden; 
-  background: var(--color-surface);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--surface-white);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .table-wrapper { overflow-x: auto; padding: 12px; }
 
-table { width: 100%; border-collapse: separate; border-spacing: 0; color: #fff; min-width: 600px; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; color: var(--text-primary); min-width: 600px; }
 th { 
   text-align: left; 
-  color: var(--color-text-secondary); 
-  padding: 16px 20px; 
+  color: var(--text-secondary); 
+  padding: 18px 24px; 
   font-size: 0.75rem;
   text-transform: uppercase;
   font-weight: 800;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  letter-spacing: 0.08em;
+  border-bottom: 1.5px solid var(--border-color);
+  background: #f8fafc;
 }
 td { 
-  padding: 20px; 
-  border-bottom: 1px solid rgba(255,255,255,0.03);
+  padding: 20px 24px; 
+  border-bottom: 1px solid var(--border-color);
   font-size: 0.95rem;
   font-weight: 600;
 }
 
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(255,255,255,0.01); }
+tr:hover td { background: #f8fafc; }
 
 @media (max-width: 600px) {
   .page-header { flex-direction: column; align-items: flex-start; }
-  .report-summary { padding: 20px; }
+  .report-summary { padding: 24px; }
 }
 </style>

@@ -104,26 +104,30 @@ onMounted(() => {
 onUnmounted(() => { window.removeEventListener('resize', updateBreakpoint) })
 </script>
 
-<style>
-/* CSS is consistent with your premium dark theme */
+/* CSS for the Minimalist Pro light theme */
 :root {
   --primary-green: #22C55E;
-  --bg-dark: #0F172A;
-  --surface-dark: #111827;
-  --text-primary: #FFFFFF;
-  --text-secondary: #9CA3AF;
+  --bg-light: #F8FAFC;
+  --surface-white: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --border-color: #E2E8F0;
   --nav-height: 75px;
+  --color-primary: var(--primary-green);
+  --color-surface: var(--surface-white);
+  --color-text-secondary: var(--text-secondary);
 }
 
 /* Base Styles */
 * { box-sizing: border-box; }
 html, body { 
   margin: 0; padding: 0; width: 100%;
-  background-color: var(--bg-dark); 
+  background-color: var(--bg-light); 
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-y: auto !important;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .auth-loading {
@@ -131,11 +135,12 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: white;
 }
 
 .spinner {
   width: 40px; height: 40px;
-  border: 3px solid rgba(255,255,255,0.1);
+  border: 3px solid #f1f5f9;
   border-top: 3px solid var(--primary-green);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -150,10 +155,10 @@ html, body {
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0;
   height: var(--nav-height);
-  background: rgba(17, 24, 39, 0.98);
-  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
   display: flex; justify-content: space-around; align-items: center;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid var(--border-color);
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -168,11 +173,7 @@ html, body {
   color: var(--text-secondary); 
   font-size: 0.65rem; 
   gap: 4px;
-  text-align: center;
-  white-space: nowrap;
-  min-width: 0;
-  padding: 8px 1px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
 }
 
 .nav-item.router-link-active { 
@@ -180,13 +181,13 @@ html, body {
 }
 
 .nav-icon {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  transition: all 0.2s ease;
 }
 
 .nav-item.router-link-active .nav-icon {
@@ -194,30 +195,9 @@ html, body {
   color: var(--primary-green);
 }
 
-.nav-icon svg {
-  width: 20px;
-  height: 20px;
-  transition: all 0.3s ease;
-}
-
-.nav-item.router-link-active svg {
-  transform: scale(1.1);
-}
-
-.create-nav-btn { position: relative; top: -15px; flex: 0 0 60px; }
-.plus-circle {
-  width: 50px; height: 50px;
-  background: var(--primary-green);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
-  border: 4px solid var(--bg-dark);
-}
-
-.fade-enter-active, .fade-leave-active { transition: opacity 0.2s ease; }
+.fade-enter-active, .fade-leave-active { transition: opacity 0.15s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
-/* Default hidden for desktop */
 .mobile-fab { display: none; }
 
 @media (max-width: 768px) {
@@ -227,24 +207,22 @@ html, body {
   
   .mobile-fab {
     position: fixed;
-    bottom: calc(var(--nav-height) + 25px);
-    right: 25px;
-    width: 65px;
-    height: 65px;
+    bottom: calc(var(--nav-height) + 20px);
+    right: 20px;
+    width: 60px;
+    height: 60px;
     background: var(--primary-green);
-    border-radius: 22px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.5);
-    z-index: 2000; /* Higher z-index to ensure visibility */
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+    z-index: 2000;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid rgba(255,255,255,0.15);
   }
   
   .mobile-fab:active {
-    transform: scale(0.9) translateY(2px);
-    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+    transform: scale(0.9);
   }
 }
 </style>

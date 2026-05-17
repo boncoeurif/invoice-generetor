@@ -106,31 +106,32 @@ const confirmDelete = async (id) => {
 }
 
 .page-header { margin-bottom: 2.5rem; }
-.page-header h1 { font-size: 2.25rem; color: #fff; margin-bottom: 0.5rem; font-weight: 900; }
-.page-header p { color: var(--color-text-secondary); font-size: 1rem; }
+.page-header h1 { font-size: 2.25rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 900; }
+.page-header p { color: var(--text-secondary); font-size: 1rem; font-weight: 600; }
 
 .search-bar {
-  background: var(--color-surface);
-  padding: 12px;
+  background: var(--surface-white);
+  padding: 10px;
   margin-bottom: 2.5rem;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
   border-radius: 18px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .search-input-wrapper {
   display: flex;
   align-items: center;
   gap: 15px;
-  background: rgba(0,0,0,0.2);
+  background: #f8fafc;
   padding: 12px 20px;
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: border-color 0.2s;
+  border: 1.5px solid transparent;
+  transition: all 0.2s;
 }
 
-.search-input-wrapper:focus-within { border-color: var(--color-primary); }
-.search-icon { color: var(--color-text-secondary); }
-.search-input-wrapper input { background: none; border: none; color: #fff; width: 100%; font-size: 1rem; outline: none; }
+.search-input-wrapper:focus-within { border-color: var(--primary-green); background: #fff; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.08); }
+.search-icon { color: var(--text-secondary); }
+.search-input-wrapper input { background: none; border: none; color: var(--text-primary); width: 100%; font-size: 1rem; outline: none; font-weight: 600; }
 
 .invoice-grid {
   display: grid;
@@ -143,26 +144,27 @@ const confirmDelete = async (id) => {
 }
 
 .invoice-card {
-  background: var(--color-surface);
+  background: var(--surface-white);
   padding: 24px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   gap: 24px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .invoice-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(34, 197, 94, 0.3);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  transform: translateY(-6px);
+  border-color: var(--primary-green);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
 }
 
 .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-.client-info h3 { margin: 8px 0; font-size: 1.25rem; color: #fff; font-weight: 800; }
-.invoice-id { font-size: 0.7rem; font-weight: 900; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.1em; }
-.date { font-size: 0.8rem; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.client-info h3 { margin: 8px 0; font-size: 1.25rem; color: var(--text-primary); font-weight: 800; }
+.invoice-id { font-size: 0.7rem; font-weight: 900; color: var(--primary-green); text-transform: uppercase; letter-spacing: 0.1em; }
+.date { font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; font-weight: 700; }
 
 .status-badge {
   padding: 6px 12px;
@@ -172,33 +174,33 @@ const confirmDelete = async (id) => {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.status-badge.paid { background: rgba(34, 197, 94, 0.1); color: #22C55E; }
+.status-badge.paid { background: #f0fdf4; color: #166534; border: 1px solid #dcfce7; }
 
 .card-details {
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 20px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .detail-item { display: flex; justify-content: space-between; align-items: center; }
-.detail-item .label { color: var(--color-text-secondary); font-size: 0.85rem; font-weight: 600; }
-.detail-item .value { color: #fff; font-weight: 800; font-size: 1rem; }
+.detail-item .label { color: var(--text-secondary); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+.detail-item .value { color: var(--text-primary); font-weight: 800; font-size: 1.1rem; }
 .text-truncate { max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .card-actions { display: flex; gap: 10px; }
 
 .btn-action-secondary {
   flex: 1;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #fff;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   padding: 12px;
   border-radius: 12px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,12 +209,12 @@ const confirmDelete = async (id) => {
   transition: all 0.2s;
 }
 
-.btn-action-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+.btn-action-secondary:hover { background: #f1f5f9; border-color: var(--text-primary); }
 
 .btn-action-delete {
-  background: rgba(239, 68, 68, 0.08);
+  background: #fff;
   color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1.5px solid #fee2e2;
   width: 48px;
   height: 48px;
   display: flex;
@@ -224,8 +226,21 @@ const confirmDelete = async (id) => {
   flex-shrink: 0;
 }
 
-.btn-action-delete:hover { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
+.btn-action-delete:hover { background: #fef2f2; border-color: #ef4444; }
 
-.empty-state { text-align: center; padding: 100px 20px; color: var(--color-text-secondary); }
-.empty-icon { margin-bottom: 24px; opacity: 0.5; }
+.empty-state { text-align: center; padding: 100px 20px; color: var(--text-secondary); }
+.empty-icon { margin-bottom: 24px; opacity: 0.3; }
+
+.btn-primary {
+  background: var(--primary-green);
+  color: #fff;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(34, 197, 94, 0.3); }
 </style>

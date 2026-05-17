@@ -57,16 +57,16 @@ const formattedValue = computed(() => {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: var(--color-surface);
-  border-radius: var(--border-radius);
-  border: 1px solid rgba(255,255,255,0.03);
-  box-shadow: var(--soft-shadow);
+  background-color: var(--surface-white);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .summary-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
-  border-color: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  border-color: var(--primary-green);
 }
 
 .card-content {
@@ -106,21 +106,21 @@ const formattedValue = computed(() => {
 .value {
   font-size: 1.75rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   line-height: 1;
 }
 
 .label {
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
-  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 @media (max-width: 768px) {
   .summary-card {
-    padding: 20px;
+    padding: 18px;
   }
   .value {
     font-size: 1.5rem;

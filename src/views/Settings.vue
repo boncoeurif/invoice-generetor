@@ -161,7 +161,7 @@ const modes = [
 
 .settings-header h1 {
   font-size: 2.25rem;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 900;
 }
 
@@ -171,14 +171,14 @@ const modes = [
 
 .section-title {
   font-size: 1.25rem;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 800;
   margin-bottom: 1.5rem;
 }
 
 .subsection-title {
-  font-size: 1rem;
-  color: var(--color-primary);
+  font-size: 0.9rem;
+  color: var(--primary-green);
   font-weight: 800;
   margin-bottom: 1.25rem;
   text-transform: uppercase;
@@ -186,14 +186,14 @@ const modes = [
 }
 
 .settings-card {
-  background: var(--color-surface);
+  background: var(--surface-white);
   border-radius: 24px;
   padding: 32px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   gap: 32px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .form-grid {
@@ -210,35 +210,35 @@ const modes = [
 
 .form-group label {
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .form-group input {
-  background: rgba(255,255,255,0.03);
-  border: 1.5px solid rgba(255,255,255,0.08);
+  background: #f8fafc;
+  border: 1.5px solid var(--border-color);
   padding: 14px 18px;
   border-radius: 14px;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1rem;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .form-group input:focus {
-  border-color: var(--color-primary);
+  border-color: var(--primary-green);
   outline: none;
-  background: rgba(34, 197, 94, 0.03);
+  background: #fff;
 }
 
 .divider {
   height: 1px;
-  background: rgba(255,255,255,0.08);
+  background: var(--border-color);
   margin: 10px 0;
 }
 
 .btn-save-profile {
-  background: var(--color-primary);
+  background: var(--primary-green);
   color: #fff;
   border: none;
   padding: 16px;
@@ -250,20 +250,21 @@ const modes = [
   align-items: center;
   justify-content: center;
   gap: 10px;
-  transition: all 0.3s;
+  transition: all 0.2s;
   margin-top: 10px;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.2);
 }
 
 .btn-save-profile:hover {
   transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
 }
 
 .setting-item label {
   display: block;
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   margin-bottom: 16px;
   text-transform: uppercase;
   font-weight: 800;
@@ -277,28 +278,27 @@ const modes = [
 }
 
 .choice-grid button {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #fff;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   padding: 16px;
   border-radius: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s;
   font-size: 0.95rem;
 }
 
 .choice-grid button:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-2px);
+  background: #f1f5f9;
+  border-color: var(--text-secondary);
 }
 
 .choice-grid button.active {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-  transform: translateY(-2px);
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.2);
 }
 
 .mode-grid {
@@ -308,8 +308,8 @@ const modes = [
 }
 
 .mode-option {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
   padding: 24px;
   border-radius: 20px;
   display: flex;
@@ -318,42 +318,39 @@ const modes = [
   justify-content: center;
   gap: 16px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s;
   text-align: center;
 }
 
 .mode-option:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-4px);
+  background: #f1f5f9;
+  border-color: var(--text-secondary);
+  transform: translateY(-2px);
 }
 
 .mode-option.active {
-  background: rgba(34, 197, 94, 0.08);
-  border-color: var(--color-primary);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-  transform: translateY(-4px);
+  background: #f0fdf4;
+  border-color: var(--primary-green);
+  transform: translateY(-2px);
 }
 
 .mode-icon :deep(svg) {
   width: 36px;
   height: 36px;
-  color: var(--color-text-secondary);
-  transition: all 0.3s;
+  color: var(--text-secondary);
+  transition: all 0.2s;
 }
 
 .mode-option:hover .mode-icon :deep(svg) {
-  color: #fff;
-  transform: scale(1.1);
+  color: var(--text-primary);
 }
 
 .mode-option.active .mode-icon :deep(svg) {
-  color: var(--color-primary);
-  transform: scale(1.1);
+  color: var(--primary-green);
 }
 
 .mode-name {
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 800;
   font-size: 1rem;
 }
@@ -366,7 +363,7 @@ const modes = [
 
 .spinner {
   width: 40px; height: 40px;
-  border: 3px solid rgba(255,255,255,0.1);
+  border: 3px solid var(--border-color);
   border-top: 3px solid var(--primary-green);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -376,7 +373,7 @@ const modes = [
 .footer-info {
   margin-top: 4rem;
   text-align: center;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-size: 0.85rem;
   display: flex;
   flex-direction: column;
@@ -389,9 +386,9 @@ const modes = [
 
 .btn-logout {
   width: 100%;
-  background: rgba(239, 68, 68, 0.05);
+  background: #fff;
   color: #ef4444;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1.5px solid #fee2e2;
   padding: 18px;
   border-radius: 16px;
   font-weight: 800;
@@ -401,14 +398,12 @@ const modes = [
   gap: 12px;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .btn-logout:hover {
-  background: rgba(239, 68, 68, 0.12);
+  background: #fef2f2;
   border-color: #ef4444;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2);
 }
 
 @media (max-width: 600px) {

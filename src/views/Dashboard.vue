@@ -199,19 +199,19 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
 </script>
 
 <style scoped>
-.dashboard-main-content { position: relative; min-height: 100vh; padding-bottom: 80px; background: var(--color-background); }
+.dashboard-main-content { position: relative; min-height: 100vh; padding-bottom: 80px; background: var(--bg-light); }
 
 .navbar { 
   display: flex; 
   justify-content: space-between; 
   padding: 20px 24px; 
-  background: var(--color-surface); 
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: var(--surface-white); 
+  border-bottom: 1px solid var(--border-color);
 }
 
 .greeting-text { display: flex; flex-direction: column; }
-.user-greeting { font-size: 0.8rem; color: var(--color-text-secondary); }
-.user-name { font-size: 1.1rem; font-weight: 800; color: #fff; }
+.user-greeting { font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; }
+.user-name { font-size: 1.15rem; font-weight: 800; color: var(--text-primary); }
 
 .dashboard-content-area { padding: 24px; display: flex; flex-direction: column; gap: 24px; max-width: 1400px; margin: 0 auto; }
 
@@ -232,9 +232,10 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
 }
 
 .rounded-card {
-  background: var(--color-surface);
+  background: var(--surface-white);
   border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
@@ -243,40 +244,40 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   justify-content: space-between;
   align-items: center;
   padding: 20px 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.section-header h2 { font-size: 1.1rem; margin: 0; color: #fff; }
-.view-all { font-size: 0.85rem; color: var(--color-primary); text-decoration: none; font-weight: 700; }
+.section-header h2 { font-size: 1rem; margin: 0; color: var(--text-primary); font-weight: 800; }
+.view-all { font-size: 0.85rem; color: var(--primary-green); text-decoration: none; font-weight: 700; }
 
-.invoice-list { padding: 12px; }
+.invoice-list { padding: 8px; }
 .invoice-item { 
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
-  padding: 16px; 
+  padding: 14px 16px; 
   border-radius: 12px; 
   transition: all 0.2s;
   border: 1px solid transparent;
 }
 .invoice-item:hover { 
-  background: rgba(255,255,255,0.02); 
-  border-color: rgba(255,255,255,0.05);
+  background: #f8fafc; 
+  border-color: var(--border-color);
 }
 
 .invoice-info { cursor: pointer; flex: 1; display: flex; justify-content: space-between; align-items: center; margin-right: 20px; }
-.invoice-customer-box { display: flex; flex-direction: column; }
-.invoice-id { font-size: 0.7rem; font-weight: 800; color: var(--color-primary); text-transform: uppercase; }
-.invoice-customer { font-weight: 600; color: #fff; }
-.invoice-detail-amount { font-weight: 800; color: #fff; }
+.invoice-customer-box { display: flex; flex-direction: column; gap: 2px; }
+.invoice-id { font-size: 0.65rem; font-weight: 800; color: var(--primary-green); text-transform: uppercase; letter-spacing: 0.05em; }
+.invoice-customer { font-weight: 600; color: var(--text-primary); font-size: 0.95rem; }
+.invoice-detail-amount { font-weight: 800; color: var(--text-primary); font-size: 1rem; }
 
 .invoice-actions { display: flex; gap: 8px; }
 .action-btn { 
-  background: rgba(255,255,255,0.03); 
-  border: 1px solid rgba(255,255,255,0.08); 
-  color: var(--color-text-secondary);
-  width: 38px; 
-  height: 38px; 
+  background: #f1f5f9; 
+  border: 1px solid var(--border-color); 
+  color: var(--text-secondary);
+  width: 36px; 
+  height: 36px; 
   border-radius: 10px; 
   display: flex; 
   align-items: center; 
@@ -284,8 +285,8 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   cursor: pointer;
   transition: all 0.2s;
 }
-.action-btn:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
-.action-btn.delete:hover { background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.2); color: #ef4444; }
+.action-btn:hover { color: var(--text-primary); background: #e2e8f0; }
+.action-btn.delete:hover { background: #fee2e2; border-color: #fecaca; color: #ef4444; }
 
 /* Analytics Styles */
 .growth-badge {
@@ -297,8 +298,8 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   font-size: 0.75rem;
   font-weight: 800;
 }
-.growth-badge.up { background: rgba(34, 197, 94, 0.1); color: var(--color-primary); }
-.growth-badge.down { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+.growth-badge.up { background: #dcfce7; color: #166534; }
+.growth-badge.down { background: #fee2e2; color: #991b1b; }
 
 .analytics-section { display: flex; flex-direction: column; }
 .chart-container { 
@@ -314,9 +315,9 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   flex-direction: column; 
   justify-content: space-between; 
   font-size: 0.6rem; 
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   padding-bottom: 25px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .chart-wrapper { 
@@ -335,21 +336,19 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
   align-items: center; 
   gap: 10px;
   position: relative;
-  max-width: 40px;
+  max-width: 36px;
 }
 
 .bar { 
   width: 100%; 
   min-height: 4px; 
-  border-radius: 6px 6px 2px 2px; 
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 8px; 
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bar-container:hover .bar {
-  filter: brightness(1.2);
+  filter: brightness(0.95);
   transform: scaleX(1.1);
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
 }
 
 .bar-hint {
@@ -370,16 +369,15 @@ const confirmDelete = async (id) => { if (confirm("Delete?")) await invoiceStore
 }
 
 .hint-value {
-  background: #fff;
-  color: #000;
+  background: var(--text-primary);
+  color: #fff;
   font-size: 0.65rem;
-  font-weight: 900;
+  font-weight: 800;
   padding: 4px 8px;
   border-radius: 6px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.day-label { font-size: 0.7rem; color: var(--color-text-secondary); font-weight: 700; text-transform: uppercase; }
+.day-label { font-size: 0.65rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; }
 
 @media (max-width: 768px) {
   .dashboard-content-area { padding: 16px; gap: 16px; }
