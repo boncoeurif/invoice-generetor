@@ -114,17 +114,29 @@ onMounted(() => {
 const userName = computed(() => authStore.user?.displayName?.split(' ')[0] || langStore.t('user'));
 const summaryData = computed(() => [
   { 
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>', 
-    value: invoiceStore.invoices.length, 
-    label: langStore.t('totalInvoices'), 
-    color: 'rgba(34, 197, 94, 0.1)' 
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>', 
+    value: `${langStore.currency} ${invoiceStore.invoices.reduce((sum, inv) => sum + Number(inv.total || 0), 0).toLocaleString()}`, 
+    label: langStore.t('totalEarnings') || 'Total Revenue', 
+    color: 'var(--color-primary)' 
   },
   { 
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>', 
-    value: invoiceStore.invoices.reduce((sum, inv) => sum + Number(inv.total || 0), 0), 
-    label: langStore.t('totalEarnings'), 
-    color: 'rgba(37, 99, 235, 0.1)' 
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>', 
+    value: invoiceStore.invoices.length, 
+    label: langStore.t('totalInvoices') || 'Total Invoices', 
+    color: '#3b82f6' 
   },
+  { 
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>', 
+    value: `${revenueGrowth}%`, 
+    label: langStore.t('growth') || 'Growth (7d)', 
+    color: revenueGrowth >= 0 ? '#10b981' : '#ef4444' 
+  },
+  { 
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>', 
+    value: recentInvoices.value.length, 
+    label: langStore.t('recentActivity') || 'Recent Activity', 
+    color: '#f59e0b' 
+  }
 ]);
 
 const recentInvoices = computed(() => [...invoiceStore.invoices].sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0)).slice(0, 5));

@@ -1,9 +1,11 @@
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
+import { profileStore } from "@/store/userProfileStore";
 
 export const generateInvoicePDF = (invoice, t) => {
   try {
     const doc = new jsPDF();
+    const profile = profileStore.profile;
     
     const safeT = (key, fallback) => {
       try {
@@ -13,7 +15,7 @@ export const generateInvoicePDF = (invoice, t) => {
       } catch (e) { return fallback; }
     };
 
-    const currency = invoice.currency || '$';
+    const currency = invoice.currency || profile.currency || '$';
 
     // 1. Professional Header
     doc.setFillColor(240, 240, 240);
@@ -31,10 +33,13 @@ export const generateInvoicePDF = (invoice, t) => {
     doc.text("FROM:", 15, 50);
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
-    doc.text("INVOXA SMART SOLUTIONS", 15, 56);
+    doc.text(profile.businessName || "INVOXA SMART SOLUTIONS", 15, 56);
     doc.setFontSize(10);
-    doc.text("Email: support@invoxa.com", 15, 62);
-    doc.text("Contact: +250 XXX XXX XXX", 15, 68);
+    doc.text(`Email: ${profile.email || 'support@invoxa.com'}`, 15, 62);
+    doc.text(`Contact: ${profile.phone || '+250 XXX XXX XXX'}`, 15, 68);
+    if (profile.address) {
+      doc.text(`Address: ${profile.address}`, 15, 74);
+    }
 
     doc.setTextColor(100, 100, 100);
     doc.text("BILL TO:", 120, 50);
@@ -49,7 +54,7 @@ export const generateInvoicePDF = (invoice, t) => {
 
     // 3. Items Table with Unit Column
     const tableConfig = {
-      startY: 80,
+      startY: profile.address ? 85 : 80,
       head: [[
         safeT('itemName', 'Item Description'), 
         safeT('quantity', 'Qty'), 

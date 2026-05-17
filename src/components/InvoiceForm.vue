@@ -116,6 +116,8 @@ onMounted(() => {
   }
 })
 
+import { notificationStore } from '@/store/notificationStore'
+
 const handleSubmit = async () => {
   if (isProcessing.value) return
   isProcessing.value = true
@@ -123,17 +125,18 @@ const handleSubmit = async () => {
   try {
     if (isEdit.value) {
       await invoiceStore.updateInvoice({ ...props.invoice, ...data })
+      notificationStore.success(langStore.t('invoiceUpdated') || 'Invoice updated successfully!')
       router.push('/')
     } else {
       const addedInvoice = await invoiceStore.addInvoice(data)
-      showSuccess.value = true
+      notificationStore.success(langStore.t('invoiceCreated') || 'Invoice created successfully!')
       setTimeout(() => {
         generateInvoicePDF(addedInvoice, langStore.t)
         setTimeout(() => router.push('/'), 1500)
       }, 500)
     }
   } catch (error) {
-    alert(langStore.t('errorSaving'))
+    notificationStore.error(langStore.t('errorSaving') || 'Error saving invoice.')
   } finally {
     isProcessing.value = false
   }
