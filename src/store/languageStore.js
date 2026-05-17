@@ -128,7 +128,19 @@ const translations = {
     pdf: "PDF",
     edit: "Edit",
     user: "User",
-    errorSaving: "Error saving invoice."
+    errorSaving: "Error saving invoice.",
+    businessProfile: "Business Profile",
+    businessName: "Business Name",
+    email: "Business Email",
+    phone: "Phone Number",
+    address: "Address",
+    bankDetails: "Bank Details",
+    bankName: "Bank Name",
+    accountNumber: "Account Number",
+    saveChanges: "Save Profile",
+    profileUpdated: "Profile updated successfully!",
+    errorUpdating: "Failed to update profile.",
+    preferences: "Preferences"
   },
   fr: {
     dashboard: 'Tableau',
@@ -248,7 +260,19 @@ const translations = {
     pdf: "PDF",
     edit: "Modifier",
     user: "Utilisateur",
-    errorSaving: "Erreur lors de l'enregistrement de la facture."
+    errorSaving: "Erreur lors de l'enregistrement de la facture.",
+    businessProfile: "Profil de l'entreprise",
+    businessName: "Nom de l'entreprise",
+    email: "Email de l'entreprise",
+    phone: "Numéro de téléphone",
+    address: "Adresse",
+    bankDetails: "Coordonnées bancaires",
+    bankName: "Nom de la banque",
+    accountNumber: "Numéro de compte",
+    saveChanges: "Enregistrer le profil",
+    profileUpdated: "Profil mis à jour avec succès !",
+    errorUpdating: "Échec de la mise à jour du profil.",
+    preferences: "Préférences"
   },
   rw: {
     dashboard: 'Igenzura',
@@ -368,7 +392,19 @@ const translations = {
     pdf: "PDF",
     edit: "Hindura",
     user: "Umukoresha",
-    errorSaving: "Habaye ikibazo mu kubika fagitire."
+    errorSaving: "Habaye ikibazo mu kubika fagitire.",
+    businessProfile: "Umwirondoro w'ubucuruzi",
+    businessName: "Izina ry'ubucuruzi",
+    email: "Imeyili y'ubucuruzi",
+    phone: "Nomero ya terefone",
+    address: "Aho riherereye",
+    bankDetails: "Amakuru ya banki",
+    bankName: "Izina rya banki",
+    accountNumber: "Nomero ya konti",
+    saveChanges: "Bika umwirondoro",
+    profileUpdated: "Umwirondoro wabitswe neza!",
+    errorUpdating: "Gubika umwirondoro byanze.",
+    preferences: "Ihitamo rindi"
   }
 }
 

@@ -81,7 +81,7 @@
                     class="bar" 
                     :style="{ 
                       height: day.height, 
-                      background: day.active ? 'linear-gradient(180deg, var(--color-primary) 0%, #10b981 100%)' : 'rgba(255,255,255,0.05)' 
+                      background: day.active ? 'linear-gradient(180deg, var(--color-primary) 0%, #16a34a 100%)' : '#f1f5f9' 
                     }"
                   ></div>
                   <span class="day-label">{{ day.label }}</span>
