@@ -80,15 +80,15 @@
                 <input v-model="item.name" required placeholder="Description..." class="doc-input" />
               </div>
               <div class="col-qty">
-                <input type="number" v-model.number="item.quantity" required min="1" class="doc-input centered" />
+                <input type="number" v-model.number="item.quantity" required min="1" class="doc-input centered" placeholder="1" />
               </div>
               <div class="col-unit">
-                <input v-model="item.unit" required class="doc-input centered" />
+                <input v-model="item.unit" required class="doc-input centered" placeholder="pcs" />
               </div>
               <div class="col-price">
                 <div class="price-input-wrapper">
                   <span class="currency-symbol">{{ langStore.currency }}</span>
-                  <input type="number" v-model.number="item.price" required min="0" step="0.01" class="doc-input" />
+                  <input type="number" v-model.number="item.price" required min="0" step="0.01" class="doc-input" placeholder="0.00" />
                 </div>
               </div>
               <div class="col-total">
@@ -155,10 +155,10 @@ const isProcessing = ref(false)
 
 const form = reactive({
   clientName: '',
-  items: [{ name: '', quantity: 1, unit: 'pcs', price: 0 }]
+  items: [{ name: '', quantity: null, unit: '', price: null }]
 })
 
-const addItem = () => form.items.push({ name: '', quantity: 1, unit: 'pcs', price: 0 })
+const addItem = () => form.items.push({ name: '', quantity: null, unit: '', price: null })
 const removeItem = (index) => form.items.splice(index, 1)
 
 const totalAmount = computed(() => 
