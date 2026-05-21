@@ -105,15 +105,22 @@ onUnmounted(() => { window.removeEventListener('resize', updateBreakpoint) })
 </script>
 
 <style>
-/* CSS for the Minimalist Pro light theme */
+/* CSS for the Premium Fintech Light Theme */
 :root {
-  --primary-green: #22C55E;
-  --bg-light: #F8FAFC;
-  --surface-white: #FFFFFF;
-  --text-primary: #0F172A;
+  --primary-green: #10B981;
+  --primary-dark: #059669;
+  --primary-light: #D1FAE5;
+  --bg-light: #F1F5F9;
+  --surface-white: rgba(255, 255, 250, 0.8);
+  --text-primary: #1E293B;
   --text-secondary: #64748B;
-  --border-color: #E2E8F0;
+  --border-color: rgba(226, 232, 240, 0.7);
   --nav-height: 75px;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   --color-primary: var(--primary-green);
   --color-surface: var(--surface-white);
   --color-text-secondary: var(--text-secondary);
@@ -123,7 +130,7 @@ onUnmounted(() => { window.removeEventListener('resize', updateBreakpoint) })
 * { box-sizing: border-box; }
 html, body { 
   margin: 0; padding: 0; width: 100%;
-  background-color: var(--bg-light); 
+  background: radial-gradient(circle at top right, #E2E8F0, #F8FAFC);
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-y: auto !important;
@@ -148,21 +155,22 @@ html, body {
 }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-.app-layout { display: flex; min-height: 100vh; width: 100%; }
-.content-area { flex: 1; display: flex; flex-direction: column; width: 100%; }
-.main-content { padding: 1.5rem; width: 100%; }
-.container { max-width: 1200px; margin: 0 auto; width: 100%; }
+.app-layout { display: flex; min-height: 100vh; width: 100%; background: transparent; }
+.content-area { flex: 1; display: flex; flex-direction: column; width: 100%; min-height: 100vh; }
+.main-content { padding: 2rem; width: 100%; flex: 1; }
+.container { max-width: 1300px; margin: 0 auto; width: 100%; }
 
 .bottom-nav {
   position: fixed; bottom: 0; left: 0; right: 0;
   height: var(--nav-height);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   display: flex; justify-content: space-around; align-items: center;
-  border-top: 1.5px solid var(--border-color);
+  border-top: 1px solid var(--glass-border);
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom);
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
 }
 
 .nav-item {
@@ -173,7 +181,7 @@ html, body {
   justify-content: center;
   text-decoration: none; 
   color: var(--text-secondary); 
-  font-size: 0.7rem; 
+  font-size: 0.75rem; 
   gap: 6px;
   transition: all 0.2s ease;
   font-weight: 700;
@@ -184,8 +192,8 @@ html, body {
 }
 
 .nav-icon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,7 +204,7 @@ html, body {
 .nav-item.router-link-active .nav-icon {
   background: #f0fdf4;
   color: var(--primary-green);
-  border: 1px solid #dcfce7;
+  border: 1.5px solid #dcfce7;
 }
 
 .fade-enter-active, .fade-leave-active { transition: opacity 0.15s ease; }
@@ -207,28 +215,32 @@ html, body {
 @media (max-width: 768px) {
   .app-layout { display: block; }
   .content-area { display: block; }
-  .main-content { padding: 1rem; padding-bottom: calc(var(--nav-height) + 120px); }
+  .main-content { padding: 1rem; padding-bottom: calc(var(--nav-height) + 140px); }
   
   .mobile-fab {
     position: fixed;
-    bottom: calc(var(--nav-height) + 25px);
-    right: 20px;
-    width: 64px;
-    height: 64px;
+    bottom: calc(var(--nav-height) + 30px);
+    right: 25px;
+    width: 68px;
+    height: 68px;
     background: var(--primary-green);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.5);
     z-index: 2000;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 3px solid #fff;
+    border: 4px solid #fff;
   }
   
   .mobile-fab:active {
-    transform: scale(0.9);
-    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+    transform: scale(0.9) translateY(2px);
+  }
+
+  /* Force larger fonts for mobile inputs for better visibility */
+  input, select, textarea {
+    font-size: 16px !important; /* Prevents iOS zoom and improves readability */
   }
 }
 </style>

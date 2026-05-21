@@ -47,19 +47,26 @@ export const invoiceStore = reactive({
 
   async addInvoice(invoice) {
     if (!authStore.user) throw new Error("Not authenticated")
+    
+    // Ensure we are working with a plain object (removes Vue reactivity)
+    const plainInvoice = JSON.parse(JSON.stringify(invoice))
+    
     const newInvoice = {
-      ...invoice,
+      ...plainInvoice,
       userId: authStore.user.uid,
       createdAt: Date.now(),
       isDeleted: false,
       date: new Date().toLocaleDateString('en-GB')
     }
+    
     const docRef = await addDoc(collection(db, "invoices"), newInvoice)
     return { id: docRef.id, ...newInvoice }
   },
 
   async updateInvoice(updatedInvoice) {
-    const { id, ...data } = updatedInvoice
+    const plainInvoice = JSON.parse(JSON.stringify(updatedInvoice))
+    const { id, ...data } = plainInvoice
+    if (!id) throw new Error("Missing invoice ID")
     await updateDoc(doc(db, "invoices", id), data)
   },
 
