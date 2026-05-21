@@ -16,19 +16,19 @@
           <div class="form-grid">
             <div class="form-group">
               <label>{{ langStore.t('businessName') || 'Business Name' }}</label>
-              <input v-model="localProfile.businessName" placeholder="Invoxa Smart Solutions" />
+              <input v-model="localProfile.businessName" :placeholder="langStore.t('placeholderBusinessName') || 'Enter your business name'" />
             </div>
             <div class="form-group">
               <label>{{ langStore.t('email') || 'Business Email' }}</label>
-              <input v-model="localProfile.email" placeholder="support@invoxa.com" />
+              <input v-model="localProfile.email" :placeholder="langStore.t('placeholderEmail') || 'Enter your business email'" />
             </div>
             <div class="form-group">
               <label>{{ langStore.t('phone') || 'Phone Number' }}</label>
-              <input v-model="localProfile.phone" placeholder="+250 XXX XXX XXX" />
+              <input v-model="localProfile.phone" :placeholder="langStore.t('placeholderPhone') || '+250 XXX XXX XXX'" />
             </div>
             <div class="form-group">
               <label>{{ langStore.t('address') || 'Address' }}</label>
-              <input v-model="localProfile.address" placeholder="Kigali, Rwanda" />
+              <input v-model="localProfile.address" :placeholder="langStore.t('placeholderAddress') || 'Enter your business address'" />
             </div>
           </div>
 
@@ -38,11 +38,11 @@
           <div class="form-grid">
             <div class="form-group">
               <label>{{ langStore.t('bankName') || 'Bank Name' }}</label>
-              <input v-model="localProfile.bankName" placeholder="Bank of Kigali" />
+              <input v-model="localProfile.bankName" :placeholder="langStore.t('placeholderBankName') || 'Enter bank name'" />
             </div>
             <div class="form-group">
               <label>{{ langStore.t('accountNumber') || 'Account Number' }}</label>
-              <input v-model="localProfile.accountNumber" placeholder="XXXX-XXXX-XXXX" />
+              <input v-model="localProfile.accountNumber" :placeholder="langStore.t('placeholderAccountNumber') || 'Enter account number'" />
             </div>
           </div>
 

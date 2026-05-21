@@ -2,11 +2,12 @@
   <div id="app" :class="['app-layout', isMobile ? 'mobile-mode' : 'desktop-mode']">
     
     <!-- 1. Authenticated App Structure -->
-    <template v-if="authStore.user && showNavigation">
-      <Sidebar v-if="!isMobile" />
+    <template v-if="authStore.user">
+      <Sidebar v-if="!isMobile && showNavigation" />
 
       <div class="content-area">
-        <Notification />
+        <!-- Show notifications on all authenticated pages except Home -->
+        <Notification v-if="route.path !== '/'" />
         
         <main class="main-content">
           <div class="container">
@@ -19,7 +20,7 @@
         </main>
 
         <!-- Bottom Nav (Mobile Only) -->
-        <nav v-if="isMobile" class="bottom-nav">
+        <nav v-if="isMobile && showNavigation" class="bottom-nav">
           <router-link to="/" class="nav-item">
             <div class="nav-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
