@@ -12,6 +12,9 @@ import {
   where
 } from 'firebase/firestore'
 
+import { notificationStore } from '@/store/notificationStore'
+import { langStore } from '@/store/languageStore'
+
 export const invoiceStore = reactive({
   invoices: [],
   deletedInvoices: [],
@@ -39,10 +42,36 @@ export const invoiceStore = reactive({
       this.deletedInvoices = allData.filter(inv => inv.isDeleted)
       this.isLoading = false
       this.isInitialized = true
+
+      // Perform cleanup and notifications after data loads
+      this.performAutoCleanup()
     }, (error) => {
       console.error("Firestore [invoices] Listener Error:", error.message)
       this.isLoading = false
     })
+  },
+
+  async performAutoCleanup() {
+    const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000
+    const WARNING_MS = 6 * 24 * 60 * 60 * 1000 // 6 days
+    const now = Date.now()
+    
+    let warningIssued = false
+
+    for (const inv of this.deletedInvoices) {
+      if (!inv.deletedAt) continue
+      
+      const timeInBin = now - inv.deletedAt
+      
+      if (timeInBin >= SEVEN_DAYS_MS) {
+        console.log(`Auto-cleaning invoice: ${inv.id}`)
+        await this.permanentlyDeleteInvoice(inv.id)
+      } else if (timeInBin >= WARNING_MS && !warningIssued) {
+        // Only show one general warning notification per session
+        notificationStore.warning(langStore.t('recycleBinWarning') || 'Some invoices in the Recycle Bin will be permanently deleted soon.')
+        warningIssued = true
+      }
+    }
   },
 
   async addInvoice(invoice) {
