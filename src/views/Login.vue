@@ -47,7 +47,7 @@ import { langStore } from '@/store/languageStore'
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0F172A; /* Deep Navy */
+  background-color: var(--bg-light);
   position: relative;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
@@ -65,8 +65,8 @@ import { langStore } from '@/store/languageStore'
 .glow-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.4;
+  filter: blur(80px);
+  opacity: 0.15;
   animation: float 20s infinite alternate ease-in-out;
 }
 
@@ -76,7 +76,7 @@ import { langStore } from '@/store/languageStore'
 
 @keyframes float {
   0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(100px, 100px) scale(1.2); }
+  100% { transform: translate(80px, 80px) scale(1.1); }
 }
 
 .login-container {
@@ -88,38 +88,39 @@ import { langStore } from '@/store/languageStore'
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 40px;
   padding: 60px 48px;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-lg);
   text-align: center;
 }
 
 .logo-wrapper {
   width: 90px;
   height: 90px;
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 32px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .logo-wrapper img { height: 50px; }
 
-h1 { font-size: 2.5rem; font-weight: 900; color: white; margin: 0 0 12px 0; letter-spacing: -0.04em; }
-.subtitle { color: rgba(255, 255, 255, 0.6); font-size: 1.1rem; font-weight: 600; margin-bottom: 48px; }
+h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-primary); margin: 0 0 12px 0; letter-spacing: -0.04em; }
+.subtitle { color: var(--text-secondary); font-size: 1.1rem; font-weight: 600; margin-bottom: 48px; }
 
 .btn-google {
   width: 100%;
   background: white;
-  color: #1E293B;
-  border: none;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
   padding: 18px;
   border-radius: 20px;
   font-weight: 800;
@@ -130,14 +131,17 @@ h1 { font-size: 2.5rem; font-weight: 900; color: white; margin: 0 0 12px 0; lett
   gap: 16px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
-.btn-google:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3); }
-.btn-google:active { transform: translateY(-1px); }
+.btn-google:hover { 
+  transform: translateY(-4px); 
+  border-color: var(--text-primary);
+  box-shadow: var(--shadow-md); 
+}
 
 .login-footer { margin-top: 48px; }
-.login-footer p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.4); font-weight: 500; line-height: 1.5; }
+.login-footer p { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; line-height: 1.5; }
 
 .login-decoration-text {
   margin-top: 40px;
@@ -146,7 +150,8 @@ h1 { font-size: 2.5rem; font-weight: 900; color: white; margin: 0 0 12px 0; lett
 .login-decoration-text span {
   font-size: 0.8rem;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
+  opacity: 0.3;
   text-transform: uppercase;
   letter-spacing: 0.3em;
 }

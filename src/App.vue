@@ -110,17 +110,17 @@ onUnmounted(() => { window.removeEventListener('resize', updateBreakpoint) })
   --primary-green: #10B981;
   --primary-dark: #059669;
   --primary-light: #D1FAE5;
-  --bg-light: #F1F5F9;
-  --surface-white: rgba(255, 255, 250, 0.8);
-  --text-primary: #1E293B;
-  --text-secondary: #64748B;
-  --border-color: rgba(226, 232, 240, 0.7);
+  --bg-light: #F8FAFC; /* Clean off-white */
+  --surface-white: #FFFFFF; /* Pure white for depth */
+  --text-primary: #0F172A; /* Deep slate for maximum readability */
+  --text-secondary: #475569; /* Slate for secondary info */
+  --border-color: #E2E8F0; /* Clean border */
   --nav-height: 75px;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --color-primary: var(--primary-green);
   --color-surface: var(--surface-white);
   --color-text-secondary: var(--text-secondary);
@@ -130,7 +130,9 @@ onUnmounted(() => { window.removeEventListener('resize', updateBreakpoint) })
 * { box-sizing: border-box; }
 html, body { 
   margin: 0; padding: 0; width: 100%;
-  background: radial-gradient(circle at top right, #E2E8F0, #F8FAFC);
+  background-color: var(--bg-light);
+  background-image: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
+                    radial-gradient(at 50% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-y: auto !important;
