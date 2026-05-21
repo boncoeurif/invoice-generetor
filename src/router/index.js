@@ -28,6 +28,14 @@ const router = createRouter({
   routes,
 })
 
+// Handle Chunk Loading Errors (Common after new deployments)
+router.onError((error, to) => {
+  if (error.message.includes('Failed to fetch dynamically imported module') || error.message.includes('Unable to preload CSS')) {
+    console.warn("Chunk load error detected, forcing reload...")
+    window.location.href = to.fullPath
+  }
+})
+
 // SEO & Auth Guard
 router.beforeEach(async (to, from, next) => {
   // Update Title for SEO

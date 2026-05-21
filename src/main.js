@@ -12,4 +12,12 @@ authStore.onLogout = () => router.push('/login')
 // Automatically check for service worker updates
 registerSW({ immediate: true })
 
+// Global error handler for asset loading failures
+window.addEventListener('error', (e) => {
+  if (e.message.includes('Unable to preload CSS')) {
+    console.warn("CSS preload error, reloading...")
+    window.location.reload()
+  }
+}, true)
+
 createApp(App).use(router).mount('#app')
