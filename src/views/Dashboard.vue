@@ -258,8 +258,14 @@ const downloadInvoice = (invoice) => generateInvoicePDF(invoice, langStore.t);
 
 .summary-cards-section { 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-  gap: 24px; 
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+  gap: 16px; 
+}
+
+@media (max-width: 480px) {
+  .summary-cards-section {
+    grid-template-columns: 1fr;
+  }
 }
 
 .dashboard-grid {
