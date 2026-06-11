@@ -396,14 +396,53 @@ const handleSubmit = async () => {
 .list-enter-from, .list-leave-to { opacity: 0; transform: translateY(10px); }
 
 @media (max-width: 768px) {
-  .live-doc { padding: 30px 20px; }
-  .billing-grid { grid-template-columns: 1fr; gap: 24px; }
+  .invoice-experience-container { padding: 10px; padding-bottom: 150px; }
+  .experience-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .header-actions { width: 100%; display: flex; flex-direction: column; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; padding: 18px; font-size: 1.1rem; }
+  
+  .live-doc { padding: 30px 16px; border-radius: 20px; }
+  .billing-grid { grid-template-columns: 1fr; gap: 30px; }
   .table-header { display: none; }
-  .item-row { display: flex; flex-direction: column; gap: 12px; padding: 20px 0; position: relative; }
+  
+  /* Mobile Item Row Overhaul */
+  .item-row { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+    padding: 24px 16px; 
+    position: relative; 
+    background: #f8fafc;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+  }
+  .item-row:hover { background: #f8fafc; margin-left: 0; margin-right: 0; padding-left: 16px; padding-right: 16px; }
+  
   .col-desc, .col-qty, .col-unit, .col-price, .col-total { width: 100%; text-align: left !important; }
-  .row-total { text-align: left; font-size: 1.1rem; }
-  .btn-row-remove { position: absolute; top: 20px; right: 0; opacity: 1; }
-  .doc-footer { flex-direction: column; gap: 40px; }
-  .footer-right { min-width: 0; }
+  
+  /* Force clear inputs on mobile */
+  .doc-input {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px !important; /* Prevent iOS zoom */
+    font-weight: 600;
+  }
+  .doc-input:focus { border-color: var(--primary-green); box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1); }
+  
+  /* Add pseudo-labels for mobile items */
+  .col-desc::before { content: "Item Description"; display: block; font-size: 0.75rem; font-weight: 800; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; }
+  .col-qty::before { content: "Quantity"; display: block; font-size: 0.75rem; font-weight: 800; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; }
+  .col-price::before { content: "Price"; display: block; font-size: 0.75rem; font-weight: 800; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; }
+  
+  .row-total { text-align: right; font-size: 1.25rem; margin-top: 10px; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+  .btn-row-remove { position: absolute; top: -12px; right: -12px; opacity: 1; background: #fee2e2; border-radius: 50%; padding: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  
+  .doc-footer { flex-direction: column; gap: 40px; padding-top: 30px; margin-top: 40px; }
+  .footer-right { min-width: 0; background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid var(--border-color); }
+  .grand-total .total-label { font-size: 1rem; }
+  .grand-total .total-value { font-size: 1.5rem; }
 }
 </style>
